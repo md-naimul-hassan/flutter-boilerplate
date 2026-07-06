@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../../../utils/constants/app_string.dart';
-import '../../../../../component/text/common_text.dart';
-import '../../../../../component/text_field/common_text_field.dart';
-import '../../../../../utils/helpers/validation.dart';
+import '../../../../../app/constants/app_string.dart';
+import '../../../../../core/component/text/common_text.dart';
+import '../../../../../core/component/text_field/common_text_field.dart';
+import '../../../../../core/utils/helpers/validation.dart';
 import '../controller/sign_up_controller.dart';
 
 class SignUpAllField extends StatelessWidget {

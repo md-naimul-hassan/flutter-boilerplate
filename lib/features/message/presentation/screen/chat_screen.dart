@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../../../config/route/app_routes.dart';
-import '../../../../../../utils/constants/app_string.dart';
-import '../../../../../../utils/enum/enum.dart';
-
-import '../../../../component/bottom_nav_bar/common_bottom_bar.dart';
-import '../../../../component/other_widgets/common_loader.dart';
-import '../../../../component/screen/error_screen.dart';
-import '../../../../component/text/common_text.dart';
-import '../../../../component/text_field/common_text_field.dart';
-
+import '../../../../app/constants/app_string.dart';
+import '../../../../app/router.dart';
+import '../../../../core/component/bottom_nav_bar/common_bottom_bar.dart';
+import '../../../../core/component/other_widgets/common_loader.dart';
+import '../../../../core/component/screen/error_screen.dart';
+import '../../../../core/component/text/common_text.dart';
+import '../../../../core/component/text_field/common_text_field.dart';
+import '../../../../core/utils/enum.dart';
 import '../../data/model/chat_list_model.dart';
 import '../controller/chat_controller.dart';
 import '../widgets/chat_list_item.dart';

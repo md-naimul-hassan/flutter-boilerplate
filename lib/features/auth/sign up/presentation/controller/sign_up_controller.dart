@@ -2,13 +2,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/countries.dart';
-import '../../../../../config/route/app_routes.dart';
-import '../../../../../config/api/api_end_point.dart';
-import '../../../../../services/api/api_client.dart';
-import '../../../../../services/api/api_service.dart';
-import '../../../../../services/storage/storage_services.dart';
-import '../../../../../utils/app_snackbar.dart';
-import '../../../../../utils/helpers/other_helper.dart';
+import '../../../../../app/router.dart';
+import '../../../../../app/constants/api_end_point.dart';
+
+import '../../../../../core/services/api/api_client.dart';
+import '../../../../../core/services/api/api_service.dart';
+import '../../../../../core/storeage/storage_services.dart';
+import '../../../../../core/utils/helpers/other_helper.dart';
+import '../../../../../core/utils/app_snackbar.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find<SignUpController>();

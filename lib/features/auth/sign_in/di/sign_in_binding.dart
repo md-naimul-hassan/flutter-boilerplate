@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-
-import '../../../../services/api/api_client.dart';
+import '../../../../core/services/api/api_client.dart';
 import '../data/datasources/sign_in_remote_data_source.dart';
 import '../data/repositories/sign_in_repository_impl.dart';
 import '../domain/repositories/sign_in_repository.dart';

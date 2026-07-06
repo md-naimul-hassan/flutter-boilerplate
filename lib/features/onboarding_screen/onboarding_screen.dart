@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:untitled/utils/extensions/extension.dart';
-import '../../../../config/route/app_routes.dart';
-import '../../../../utils/constants/app_images.dart';
-import '../../../../utils/constants/app_string.dart';
-import '../../component/image/common_image.dart';
+
+import '../../app/constants/app_string.dart';
+import '../../app/router.dart';
+import '../../core/component/image/common_image.dart';
+import '../../app/constants/app_images.dart';
+import '../../core/utils/extension.dart';
+
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

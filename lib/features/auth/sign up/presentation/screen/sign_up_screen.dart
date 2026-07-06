@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../../../../utils/extensions/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../../component/button/common_button.dart';
-import '../../../../../component/text/common_text.dart';
+import '../../../../../app/constants/app_string.dart';
+import '../../../../../core/component/button/common_button.dart';
+import '../../../../../core/component/text/common_text.dart';
+import '../../../../../core/utils/extension.dart';
 import '../controller/sign_up_controller.dart';
-import '../../../../../../../utils/constants/app_string.dart';
 import '../widget/already_accunt_rich_text.dart';
 import '../widget/sign_up_all_filed.dart';
 

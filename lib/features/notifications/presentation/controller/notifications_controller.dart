@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/utils/app_snackbar.dart';
+import 'package:untitled/core/utils/app_snackbar.dart';
 
 import '../../data/model/notification_model.dart';
 import '../../repository/notification_repository.dart';

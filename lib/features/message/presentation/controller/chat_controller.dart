@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../services/api/api_client.dart';
+import '../../../../core/services/api/api_client.dart';
+import '../../../../core/services/api/api_service.dart';
+import '../../../../core/services/socket/socket_service.dart';
+import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/utils/enum.dart';
 import '../../data/model/chat_list_model.dart';
-import '../../../../config/api/api_end_point.dart';
-import '../../../../services/api/api_service.dart';
-import '../../../../services/socket/socket_service.dart';
-import '../../../../services/storage/storage_services.dart';
-import '../../../../utils/app_snackbar.dart';
-import '../../../../utils/enum/enum.dart';
+import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/utils/app_snackbar.dart';
 
 class ChatController extends GetxController {
   Status status = Status.completed;

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'app.dart';
-import 'utils/log/global_log.dart';
+import 'app/app.dart';
+import 'core/error/error_handler.dart';
 
 void main() => runZonedGuarded(_startPoint, _reportUncaughtError);
 

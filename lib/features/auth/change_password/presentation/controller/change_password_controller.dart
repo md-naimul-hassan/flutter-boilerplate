@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
-import '../../../../../services/api/api_client.dart';
-import '../../../../../services/api/api_service.dart';
-import '../../../../../config/api/api_end_point.dart';
-import '../../../../../utils/app_snackbar.dart';
+import '../../../../../core/services/api/api_client.dart';
+import '../../../../../app/constants/api_end_point.dart';
+import '../../../../../core/services/api/api_service.dart';
+import '../../../../../core/utils/app_snackbar.dart';
 
 class ChangePasswordController extends GetxController {
   bool isLoading = false;

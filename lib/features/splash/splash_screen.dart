@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../config/route/app_routes.dart';
-import '../../../../utils/constants/app_images.dart';
-import '../../component/image/common_image.dart';
+
+import '../../app/router.dart';
+import '../../core/component/image/common_image.dart';
+import '../../app/constants/app_images.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

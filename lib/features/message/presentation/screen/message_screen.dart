@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../component/image/common_image.dart';
-import '../../../../component/text/common_text.dart';
-import '../../../../component/text_field/common_text_field.dart';
-import '../../../../utils/constants/app_string.dart';
-import '../../../../../../utils/extensions/extension.dart';
-
+import '../../../../app/constants/app_string.dart';
+import '../../../../core/component/image/common_image.dart';
+import '../../../../core/component/text/common_text.dart';
+import '../../../../core/component/text_field/common_text_field.dart';
+import '../../../../core/utils/extension.dart';
 import '../../data/model/chat_message_model.dart';
 import '../controller/message_controller.dart';
 import '../widgets/chat_bubble_message.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'global_error_handler.dart';
+
+import '../error/error_handler.dart';
 
 class AppLifecycleHandler with WidgetsBindingObserver {
   void start() {

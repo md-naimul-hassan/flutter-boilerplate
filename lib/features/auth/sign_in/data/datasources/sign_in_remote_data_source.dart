@@ -1,5 +1,5 @@
-import '../../../../../config/api/api_end_point.dart';
-import '../../../../../services/api/api_client.dart';
+import '../../../../../app/constants/api_end_point.dart';
+import '../../../../../core/services/api/api_client.dart';
 import '../models/auth_session_model.dart';
 
 abstract class SignInRemoteDataSource {

@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:untitled/services/api/api_client.dart';
-
+import '../../../../core/services/api/api_client.dart';
+import '../../../../core/services/api/api_service.dart';
+import '../../../../core/utils/enum.dart';
 import '../../data/model/html_model.dart';
-import '../../../../services/api/api_service.dart';
-import '../../../../config/api/api_end_point.dart';
-import '../../../../utils/app_snackbar.dart';
-import '../../../../utils/enum/enum.dart';
+import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/utils/app_snackbar.dart';
 
 class TermsOfServicesController extends GetxController {
   /// API status

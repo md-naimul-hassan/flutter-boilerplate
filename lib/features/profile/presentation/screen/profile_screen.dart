@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import 'package:untitled/services/storage/storage_services.dart';
-import 'package:untitled/utils/extensions/extension.dart';
-
-import '../../../../../../config/route/app_routes.dart';
-import '../../../../../../utils/constants/app_string.dart';
-
-import '../../../../component/bottom_nav_bar/common_bottom_bar.dart';
-import '../../../../component/image/common_image.dart';
-import '../../../../component/other_widgets/item.dart';
-import '../../../../component/pop_up/common_pop_menu.dart';
-import '../../../../component/text/common_text.dart';
-
+import '../../../../app/constants/app_string.dart';
+import '../../../../app/router.dart';
+import '../../../../core/component/bottom_nav_bar/common_bottom_bar.dart';
+import '../../../../core/component/image/common_image.dart';
+import '../../../../core/component/other_widgets/item.dart';
+import '../../../../core/component/pop_up/common_pop_menu.dart';
+import '../../../../core/component/text/common_text.dart';
+import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/utils/extension.dart';
 import '../controller/profile_controller.dart';
 
 class ProfileScreen extends StatelessWidget {

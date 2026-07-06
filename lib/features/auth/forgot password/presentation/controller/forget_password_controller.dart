@@ -2,12 +2,14 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../config/api/api_end_point.dart';
-import '../../../../../config/route/app_routes.dart';
-import '../../../../../services/api/api_client.dart';
-import '../../../../../services/api/api_service.dart';
-import '../../../../../utils/app_snackbar.dart';
-import '../../../../../utils/enum/enum.dart';
+import '../../../../../app/router.dart';
+import '../../../../../app/constants/api_end_point.dart';
+import '../../../../../core/services/api/api_client.dart';
+import '../../../../../core/services/api/api_service.dart';
+import '../../../../../core/utils/enum.dart';
+import '../../../../../core/utils/app_snackbar.dart';
+
+
 
 class ForgetPasswordController extends GetxController {
   @override

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../component/text/common_text.dart';
+import '../../../../core/component/text/common_text.dart';
+import '../../../../app/constants/app_colors.dart';
+import '../../../../core/utils/extension.dart';
 import '../../data/model/notification_model.dart';
-import '../../../../../utils/extensions/extension.dart';
-import '../../../../../utils/constants/app_colors.dart';
+
 
 class NotificationItem extends StatelessWidget {
   final NotificationModel item;

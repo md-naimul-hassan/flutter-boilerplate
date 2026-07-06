@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../../../../utils/extensions/extension.dart';
-import '../../../../../component/button/common_button.dart';
-import '../../../../../component/image/common_image.dart';
-import '../../../../../component/text/common_text.dart';
-import '../../../../../component/text_field/common_text_field.dart';
-import '../../../../../utils/helpers/validation.dart';
+import '../../../../../app/constants/app_string.dart';
+import '../../../../../core/component/button/common_button.dart';
+import '../../../../../core/component/image/common_image.dart';
+import '../../../../../core/component/text/common_text.dart';
+import '../../../../../core/component/text_field/common_text_field.dart';
+import '../../../../../app/constants/app_images.dart';
+import '../../../../../core/utils/extension.dart';
+import '../../../../../core/utils/helpers/validation.dart';
 import '../controller/forget_password_controller.dart';
-import '../../../../../../../utils/constants/app_images.dart';
-import '../../../../../../../utils/constants/app_string.dart';
+
 
 class CreatePassword extends StatelessWidget {
   CreatePassword({super.key});

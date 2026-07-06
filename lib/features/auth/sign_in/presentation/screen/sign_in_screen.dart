@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:untitled/component/other_widgets/common_loader.dart';
-import '../../../../../component/text/common_text.dart';
-import '../../../../../component/text_field/common_text_field.dart';
-import '../../../../../config/route/app_routes.dart';
-import '../../../../../utils/constants/app_colors.dart';
-import '../../../../../utils/constants/app_string.dart';
-import '../../../../../utils/extensions/extension.dart';
-import '../../../../../utils/helpers/validation.dart';
+import '../../../../../app/constants/app_string.dart';
+import '../../../../../app/router.dart';
+import '../../../../../core/component/other_widgets/common_loader.dart';
+import '../../../../../core/component/text/common_text.dart';
+import '../../../../../core/component/text_field/common_text_field.dart';
+import '../../../../../app/constants/app_colors.dart';
+import '../../../../../core/utils/extension.dart';
+import '../../../../../core/utils/helpers/validation.dart';
 import '../controller/sign_in_controller.dart';
 import '../widgets/do_not_have_account.dart';
 

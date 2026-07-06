@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/services/api/api_client.dart';
-
-import 'package:untitled/services/api/multipart_helper.dart';
-
-import '../../../../config/api/api_end_point.dart';
-import '../../../../config/route/app_routes.dart';
-import '../../../../services/api/api_service.dart';
-import '../../../../services/storage/storage_services.dart';
-import '../../../../utils/app_snackbar.dart';
-import '../../../../utils/helpers/other_helper.dart';
+import '../../../../app/router.dart';
+import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/services/api/api_client.dart';
+import '../../../../core/services/api/api_service.dart';
+import '../../../../core/services/api/multipart_helper.dart';
+import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/utils/helpers/other_helper.dart';
+import '../../../../core/utils/app_snackbar.dart';
 
 class ProfileController extends GetxController {
   /// Language list

@@ -1,18 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/utils/log/error_log.dart';
-
-import '../../../../services/api/api_client.dart';
+import '../../../../core/services/api/api_client.dart';
+import '../../../../core/services/api/api_service.dart';
+import '../../../../core/services/socket/socket_service.dart';
+import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/utils/enum.dart';
+import '../../../../core/utils/logger.dart';
 import '../../data/model/chat_message_model.dart';
 import '../../data/model/message_model.dart';
-
-import '../../../../config/api/api_end_point.dart';
-import '../../../../services/api/api_service.dart';
-import '../../../../services/socket/socket_service.dart';
-import '../../../../services/storage/storage_services.dart';
-import '../../../../utils/app_snackbar.dart';
-import '../../../../utils/enum/enum.dart';
+import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/utils/app_snackbar.dart';
 
 class MessageController extends GetxController {
   /// Controller instance

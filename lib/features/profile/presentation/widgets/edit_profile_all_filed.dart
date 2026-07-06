@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/countries.dart';
-import 'package:untitled/utils/extensions/extension.dart';
-
-import '../../../../component/text/common_text.dart';
-import '../../../../component/text_field/common_phone_number_text_filed.dart';
-import '../../../../component/text_field/common_text_field.dart';
-
-import '../../../../utils/helpers/validation.dart';
-import '../../../../../utils/constants/app_colors.dart';
-import '../../../../../utils/constants/app_string.dart';
-
+import '../../../../app/constants/app_string.dart';
+import '../../../../core/component/text/common_text.dart';
+import '../../../../core/component/text_field/common_phone_number_text_filed.dart';
+import '../../../../core/component/text_field/common_text_field.dart';
+import '../../../../app/constants/app_colors.dart';
+import '../../../../core/utils/extension.dart';
+import '../../../../core/utils/helpers/validation.dart';
 import '../controller/profile_controller.dart';
 
 class EditProfileAllFiled extends StatelessWidget {
