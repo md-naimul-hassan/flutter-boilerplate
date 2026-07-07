@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import '../../../app/router.dart';
 import '../../../app/constants/app_colors.dart';
 import '../../../app/constants/app_string.dart';
 import '../button/common_button.dart';
@@ -21,7 +21,7 @@ class NoInternet extends StatelessWidget {
             const CommonText(text: AppString.noInternet, fontSize: 18, top: 16),
             const CommonText(text: AppString.checkInternet, top: 8, bottom: 20),
             CommonButton(
-              onTap: () => Get.back(),
+              onTap: () => AppNavigator.back(),
               titleText: AppString.back,
               buttonWidth: 80,
               buttonHeight: 40,

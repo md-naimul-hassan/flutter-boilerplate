@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../app/router.dart';
 import '../../core/component/image/common_image.dart';
@@ -23,13 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigate() async {
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
-    Get.toNamed(AppRoutes.onboarding);
+    AppNavigator.toNamed(AppRoutes.onboarding);
 
     // Example logic
     // final route = LocalStorage.token.isNotEmpty
     //     ? AppRoutes.home
     //     : AppRoutes.onboarding;
-    // Get.offAllNamed(route);
+    // AppNavigator.offAllNamed(route);
   }
 
   @override

@@ -1,78 +1,128 @@
-import 'package:get/get.dart';
-import '../features/auth/change_password/di/binding.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import '../features/auth/change_password/presentation/screen/screen.dart';
-import '../../features/auth/forgot password/presentation/screen/create_password.dart';
-import '../../features/auth/forgot password/presentation/screen/forgot_password.dart';
-import '../../features/auth/forgot password/presentation/screen/verify_screen.dart';
-import '../../features/auth/sign_in/di/sign_in_binding.dart';
+import '../features/auth/forgot_password/presentation/screen/create_password.dart';
+import '../features/auth/forgot_password/presentation/screen/forgot_password.dart';
+import '../features/auth/forgot_password/presentation/screen/verify_screen.dart';
 import '../../features/auth/sign_in/presentation/screen/sign_in_screen.dart';
-import '../../features/auth/sign up/di/sign_up_binding.dart';
-import '../../features/auth/sign up/presentation/screen/sign_up_screen.dart';
-import '../../features/auth/sign up/presentation/screen/verify_user.dart';
+import '../features/auth/sign_up/presentation/screen/sign_up_screen.dart';
+import '../features/auth/sign_up/presentation/screen/verify_user.dart';
 import '../../features/message/presentation/screen/chat_screen.dart';
 import '../../features/message/presentation/screen/message_screen.dart';
 import '../../features/notifications/presentation/screen/notifications_screen.dart';
-import '../../features/onboarding_screen/onboarding_screen.dart';
 import '../../features/profile/presentation/screen/edit_profile.dart';
 import '../../features/profile/presentation/screen/profile_screen.dart';
 import '../../features/setting/presentation/screen/privacy_policy_screen.dart';
 import '../../features/setting/presentation/screen/setting_screen.dart';
 import '../../features/setting/presentation/screen/terms_of_services_screen.dart';
 import '../../features/splash/splash_screen.dart';
+import '../features/onboarding/onboarding_screen.dart';
 
 class AppRoutes {
-static const String test = '/test_screen.dart';
   static const String splash = '/';
-  static const String onboarding = '/onboarding_screen.dart';
-  static const String signUp = '/sign_up_screen.dart';
-  static const String verifyUser = '/verify_user.dart';
-  static const String signIn = '/sign_in_screen.dart';
-  static const String forgotPassword = '/forgot_password.dart';
-  static const String verifyEmail = '/verify_screen.dart';
-  static const String createPassword = '/create_password.dart';
-  static const String changePassword = '/change_password_screen.dart';
-  static const String notifications = '/notifications_screen.dart';
-  static const String chat = '/chat_screen.dart';
-  static const String message = '/message_screen.dart';
-  static const String profile = '/profile_screen.dart';
-  static const String editProfile = '/edit_profile.dart';
-  static const String privacyPolicy = '/privacy_policy_screen.dart';
-  static const String termsOfServices = '/terms_of_services_screen.dart';
-  static const String setting = '/setting_screen.dart';
+  static const String onboarding = '/onboarding';
+  static const String signUp = '/sign-up-screen';
+  static const String verifyUser = '/verify-user';
+  static const String signIn = '/sign-in-screen';
+  static const String forgotPassword = '/forgot-password';
+  static const String verifyEmail = '/verify';
+  static const String createPassword = '/create-password';
+  static const String changePassword = '/change-password';
+  static const String notifications = '/notifications';
+  static const String chat = '/chat';
+  static const String message = '/message';
+  static const String profile = '/profile';
+  static const String editProfile = '/edit-profile';
+  static const String privacyPolicy = '/privacy-policy';
+  static const String termsOfServices = '/terms-of-services';
+  static const String setting = '/setting-screen';
+}
 
-  static List<GetPage<String>> routes = [
-    GetPage(name: splash, page: () => const SplashScreen()),
-    GetPage(name: onboarding, page: () => const OnboardingScreen()),
-    GetPage(
-      name: signUp,
-      page: () => SignUpScreen(),
-      binding: SignUpBinding(),
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+
+final GoRouter appRouter = GoRouter(
+  navigatorKey: rootNavigatorKey,
+  initialLocation: AppRoutes.splash,
+  routes: [
+    GoRoute(path: AppRoutes.splash, builder: (_, _) => const SplashScreen()),
+    GoRoute(
+      path: AppRoutes.onboarding,
+      builder: (_, _) => const OnboardingScreen(),
     ),
-    GetPage(
-      name: verifyUser,
-      page: () => const VerifyUser(),
-      binding: SignUpBinding(),
+    GoRoute(path: AppRoutes.signUp, builder: (_, _) => const SignUpScreen()),
+    GoRoute(path: AppRoutes.verifyUser, builder: (_, _) => const VerifyUser()),
+    GoRoute(path: AppRoutes.signIn, builder: (_, _) => const SignInScreen()),
+    GoRoute(
+      path: AppRoutes.forgotPassword,
+      builder: (_, _) => const ForgotPasswordScreen(),
     ),
-    GetPage(
-      name: signIn,
-      page: () => SignInScreen(),
-      binding: SignInBinding(),
+    GoRoute(
+      path: AppRoutes.verifyEmail,
+      builder: (_, _) => const VerifyScreen(),
     ),
-    GetPage(name: forgotPassword, page: () => ForgotPasswordScreen()),
-    GetPage(name: verifyEmail, page: () => VerifyScreen()),
-    GetPage(name: createPassword, page: () => CreatePassword()),
-    GetPage(
-      name: changePassword,
-      page: () => const ChangePasswordScreen(),
-      binding: ChangePasswordBinding(),
+    GoRoute(
+      path: AppRoutes.createPassword,
+      builder: (_, _) => const CreatePassword(),
     ),
-    GetPage(name: notifications, page: () => const NotificationScreen()),
-    GetPage(name: chat, page: () => const ChatListScreen()),
-    GetPage(name: message, page: () => const MessageScreen()),
-    GetPage(name: profile, page: () => const ProfileScreen()),
-    GetPage(name: editProfile, page: () => EditProfile()),
-    GetPage(name: privacyPolicy, page: () => const PrivacyPolicyScreen()),
-    GetPage(name: termsOfServices, page: () => const TermsOfServicesScreen()),
-    GetPage(name: setting, page: () => const SettingScreen()),
-  ];
+    GoRoute(
+      path: AppRoutes.changePassword,
+      builder: (_, _) => const ChangePasswordScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.notifications,
+      builder: (_, _) => const NotificationScreen(),
+    ),
+    GoRoute(path: AppRoutes.chat, builder: (_, _) => const ChatListScreen()),
+    GoRoute(
+      path: AppRoutes.message,
+      builder: (_, state) {
+        final args = (state.extra as Map?)?.cast<String, String>() ?? const {};
+        return MessageScreen(
+          chatId: args['chatId'] ?? '',
+          name: args['name'] ?? '',
+          image: args['image'] ?? '',
+        );
+      },
+    ),
+    GoRoute(path: AppRoutes.profile, builder: (_, _) => const ProfileScreen()),
+    GoRoute(
+      path: AppRoutes.editProfile,
+      builder: (_, _) => const EditProfile(),
+    ),
+    GoRoute(
+      path: AppRoutes.privacyPolicy,
+      builder: (_, _) => const PrivacyPolicyScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.termsOfServices,
+      builder: (_, _) => const TermsOfServicesScreen(),
+    ),
+    GoRoute(path: AppRoutes.setting, builder: (_, _) => const SettingScreen()),
+  ],
+);
+
+/// Context-free navigation helper (drop-in replacement for GetX navigation).
+class AppNavigator {
+  AppNavigator._();
+
+  /// Push a new route onto the stack (like `Get.toNamed`).
+  static Future<T?> toNamed<T>(String location, {Object? extra}) {
+    return appRouter.push<T>(location, extra: extra);
+  }
+
+  /// Replace the whole stack with [location] (like `Get.offAllNamed`).
+  static void offAllNamed(String location, {Object? extra}) {
+    appRouter.go(location, extra: extra);
+  }
+
+  /// Replace the current route (like `Get.offNamed`).
+  static void offNamed(String location, {Object? extra}) {
+    appRouter.pushReplacement(location, extra: extra);
+  }
+
+  /// Pop the current route (like `Get.back`).
+  static void back<T>([T? result]) {
+    if (appRouter.canPop()) appRouter.pop<T>(result);
+  }
 }

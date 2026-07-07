@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import '../../../../app/constants/app_string.dart';
 import '../../../../app/router.dart';
+import '../../../../app/di.dart';
+import '../../../../app/constants/app_string.dart';
 import '../../../../core/component/bottom_nav_bar/common_bottom_bar.dart';
 import '../../../../core/component/other_widgets/common_loader.dart';
 import '../../../../core/component/screen/error_screen.dart';
 import '../../../../core/component/text/common_text.dart';
 import '../../../../core/component/text_field/common_text_field.dart';
 import '../../../../core/utils/enum.dart';
-import '../../data/model/chat_list_model.dart';
-import '../controller/chat_controller.dart';
+import '../../data/datasources/remote_data_source.dart';
+import '../../data/models/chat_list_model.dart';
+import '../bloc/chat/bloc.dart';
+import '../bloc/chat/events.dart';
+import '../bloc/chat/state.dart';
 import '../widgets/chat_list_item.dart';
 
 class ChatListScreen extends StatelessWidget {
@@ -18,72 +22,100 @@ class ChatListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      /// App bar
-      appBar: AppBar(
-        centerTitle: true,
-        title: const CommonText(
-          text: AppString.inbox,
-          fontWeight: .w600,
-          fontSize: 24,
+    return BlocProvider(
+      create: (_) => ChatBloc(sl<MessageRemoteDataSource>())..add(ChatStarted()),
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const CommonText(
+            text: AppString.inbox,
+            fontWeight: .w600,
+            fontSize: 24,
+          ),
         ),
+        body: BlocBuilder<ChatBloc, ChatState>(
+          builder: (context, state) => switch (state.status) {
+            Status.loading => const CommonLoader(),
+            Status.error => ErrorScreen(
+              onTap: () => context.read<ChatBloc>().add(ChatStarted()),
+            ),
+            Status.completed => _ChatList(state: state),
+          },
+        ),
+        bottomNavigationBar: const CommonBottomNavBar(currentIndex: 2),
       ),
+    );
+  }
+}
 
-      /// Body
-      body: GetBuilder<ChatController>(
-        init: ChatController(), // ensure created once
-        builder: (controller) => switch (controller.status) {
-          /// Loading
-          Status.loading => const CommonLoader(),
+class _ChatList extends StatefulWidget {
+  const _ChatList({required this.state});
 
-          /// Error
-          Status.error => ErrorScreen(onTap: controller.getChats),
+  final ChatState state;
 
-          /// Completed
-          Status.completed => Padding(
-            padding: .symmetric(horizontal: 20.w, vertical: 10.h),
-            child: Column(
-              children: [
-                /// Search bar
-                CommonTextField(
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: AppString.searchDoctor,
-                ),
+  @override
+  State<_ChatList> createState() => _ChatListState();
+}
 
-                /// Chat list
-                Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: controller.refreshChats,
-                    child: ListView.builder(
-                      padding: .only(top: 16.h),
-                      controller: controller.scrollController,
-                      itemCount: controller.chats.length,
-                      itemBuilder: (_, index) {
-                        final ChatModel item = controller.chats[index];
+class _ChatListState extends State<_ChatList> {
+  final _scrollController = ScrollController();
 
-                        return GestureDetector(
-                          onTap: () => Get.toNamed(
-                            AppRoutes.message,
-                            parameters: {
-                              'chatId': item.id,
-                              'name': item.participant.fullName,
-                              'image': item.participant.image,
-                            },
-                          ),
-                          child: ChatListItem(item: item),
-                        );
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent) {
+        context.read<ChatBloc>().add(ChatLoadMore());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final chats = widget.state.chats;
+
+    return Padding(
+      padding: .symmetric(horizontal: 20.w, vertical: 10.h),
+      child: Column(
+        children: [
+          const CommonTextField(
+            prefixIcon: Icon(Icons.search),
+            hintText: AppString.searchDoctor,
+          ),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async =>
+                  context.read<ChatBloc>().add(ChatRefreshed()),
+              child: ListView.builder(
+                padding: .only(top: 16.h),
+                controller: _scrollController,
+                itemCount: chats.length,
+                itemBuilder: (_, index) {
+                  final ChatModel item = chats[index];
+                  return GestureDetector(
+                    onTap: () => AppNavigator.toNamed(
+                      AppRoutes.message,
+                      extra: {
+                        'chatId': item.id,
+                        'name': item.participant.fullName,
+                        'image': item.participant.image,
                       },
                     ),
-                  ),
-                ),
-              ],
+                    child: ChatListItem(item: item),
+                  );
+                },
+              ),
             ),
           ),
-        },
+        ],
       ),
-
-      /// Bottom nav
-      bottomNavigationBar: const CommonBottomNavBar(currentIndex: 2),
     );
   }
 }

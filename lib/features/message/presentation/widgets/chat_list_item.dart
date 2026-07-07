@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/component/image/common_image.dart';
 import '../../../../core/component/text/common_text.dart';
 import '../../../../core/utils/extension.dart';
-import '../../data/model/chat_list_model.dart';
+import '../../data/models/chat_list_model.dart';
 
 class ChatListItem extends StatelessWidget {
   final ChatModel item;

@@ -39,9 +39,13 @@ class CommonButton extends StatelessWidget {
   }
 
   Widget _buildElevatedButton() {
-    return ElevatedButton(
-      onPressed: onTap,
-      child: isLoading ? _buildLoader() : _buildText(),
+    return SizedBox(
+      height: buttonHeight,
+      width: buttonWidth,
+      child: ElevatedButton(
+        onPressed: onTap,
+        child: isLoading ? _buildLoader() : _buildText(),
+      ),
     );
   }
 

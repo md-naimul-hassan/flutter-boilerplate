@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import '../../../app/router.dart';
 import '../../../app/constants/app_colors.dart';
 import '../../../app/constants/app_string.dart';
 import '../../storeage/storage_services.dart';
@@ -93,7 +93,7 @@ class PopUpMenu extends StatelessWidget {
 
 void logOutPopUp() {
   showDialog(
-    context: Get.context!,
+    context: rootNavigatorKey.currentContext!,
     builder: (context) {
       // Controller for the animation
       return AnimationPopUp(
@@ -124,7 +124,7 @@ void logOutPopUp() {
                           borderWidth: 1.5,
                           buttonColor: AppColors.transparent,
                           titleColor: AppColors.primaryColor,
-                          onTap: () => Get.back(),
+                          onTap: () => Navigator.of(context).pop(),
                         ),
                       ),
                       SizedBox(width: 16.w),
@@ -155,7 +155,7 @@ void deletePopUp({
 }) {
   final formKey = GlobalKey<FormState>();
   showDialog(
-    context: Get.context!,
+    context: rootNavigatorKey.currentContext!,
     builder: (context) {
       return AnimationPopUp(
         child: AlertDialog(
@@ -261,9 +261,7 @@ class AnimationPopUpState extends State<AnimationPopUp>
 
   static Future<void> closeDialog() async {
     await _animationController.reverse();
-    if (Get.context!.mounted) {
-      Get.back();
-    }
+    rootNavigatorKey.currentState?.pop();
   }
 
   @override

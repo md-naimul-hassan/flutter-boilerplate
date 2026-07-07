@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../../app/constants/app_colors.dart';
 import '../../../app/constants/app_string.dart';
 import '../../utils/extension.dart';
@@ -30,7 +29,7 @@ class ErrorScreen extends StatelessWidget {
             onPressed: onTap,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primaryColor,
-              minimumSize: Size(Get.width / 1.6, 40),
+              minimumSize: Size(MediaQuery.of(context).size.width / 1.6, 40),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(32),

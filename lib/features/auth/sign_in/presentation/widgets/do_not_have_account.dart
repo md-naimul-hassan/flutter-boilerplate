@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../app/constants/app_string.dart';
@@ -27,7 +26,7 @@ class DoNotHaveAccount extends StatelessWidget {
           TextSpan(
             text: AppString.signUp,
             recognizer: TapGestureRecognizer()
-              ..onTap = () => Get.toNamed(AppRoutes.signUp),
+              ..onTap = () => AppNavigator.toNamed(AppRoutes.signUp),
             style: GoogleFonts.plusJakartaSans(
               color: AppColors.primaryColor,
               fontSize: 16,

@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../app/router.dart';
-import '../../features/profile/data/model/user_model.dart';
+import '../../features/profile/data/models/user_model.dart';
 import '../services/socket/socket_service.dart';
 import '../utils/logger.dart';
 import 'storage_keys.dart';
@@ -84,6 +83,6 @@ class LocalStorage {
   static Future<void> logout() async {
     SocketService.disconnect();
     await clear();
-    Get.offAllNamed(AppRoutes.signIn);
+    AppNavigator.offAllNamed(AppRoutes.signIn);
   }
 }

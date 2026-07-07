@@ -26,7 +26,7 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
       emit(
         state.copyWith(status: ApiStatus.success, message: message),
       );
-    } on AppException catch (e) {
+    } on ApiException catch (e) {
       emit(
         state.copyWith(
           status: ApiStatus.failure,

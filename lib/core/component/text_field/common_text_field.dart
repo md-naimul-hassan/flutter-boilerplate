@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../app/constants/app_colors.dart';
 import '../text/common_text.dart';
 
-// ignore: must_be_immutable
-class CommonTextField extends StatelessWidget {
-  CommonTextField({
+class CommonTextField extends StatefulWidget {
+  const CommonTextField({
     super.key,
     this.hintText,
     this.labelText,
@@ -54,7 +52,6 @@ class CommonTextField extends StatelessWidget {
   final int? mexLength;
   final bool isPassword;
   final bool? isDense;
-  RxBool obscureText = false.obs;
   final Function(String)? onSubmitted;
   final Function(String)? onChanged;
   final VoidCallback? onTap;
@@ -65,84 +62,90 @@ class CommonTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => TextFormField(
-        autovalidateMode: .onUnfocus,
-        keyboardType: keyboardType,
-        controller: controller,
-        obscureText: isPassword ? !obscureText.value : obscureText.value,
-        textInputAction: textInputAction,
-        maxLength: mexLength,
-        onChanged: onChanged,
-        inputFormatters: inputFormatters,
-        style: TextStyle(fontSize: 14, color: textColor),
-        onFieldSubmitted: onSubmitted,
-        onTap: onTap,
-        validator: validator,
-        maxLines: isPassword ? 1 : maxLines,
-        decoration: InputDecoration(
-          errorMaxLines: 2,
-          isDense: isDense,
-          filled: true,
-          prefixIconConstraints: const BoxConstraints(
-            maxWidth: 30,
-            maxHeight: 30,
-          ),
-          prefixIcon: prefixIcon,
-          fillColor: fillColor,
+  State<CommonTextField> createState() => _CommonTextFieldState();
+}
 
-          counterText: '',
-          contentPadding: .symmetric(
-            horizontal: paddingHorizontal.w,
-            vertical: paddingVertical.h,
-          ),
-          border: _buildBorder(),
-          enabledBorder: _buildBorder(),
-          focusedBorder: _buildBorder(),
-          disabledBorder: _buildBorder(),
-          errorBorder: _buildBorder(),
-          hintText: hintText,
-          labelText: labelText,
-          hintStyle: GoogleFonts.roboto(fontSize: 14, color: hintTextColor),
-          labelStyle: GoogleFonts.roboto(fontSize: 14, color: labelTextColor),
-          prefix: CommonText(text: prefixText ?? '', fontWeight: .w400),
-          suffixIcon: isPassword ? _buildPasswordSuffixIcon() : suffixIcon,
+class _CommonTextFieldState extends State<CommonTextField> {
+  bool _obscureText = false;
+
+  void _toggle() => setState(() => _obscureText = !_obscureText);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autovalidateMode: .onUnfocus,
+      keyboardType: widget.keyboardType,
+      controller: widget.controller,
+      obscureText: widget.isPassword ? !_obscureText : _obscureText,
+      textInputAction: widget.textInputAction,
+      maxLength: widget.mexLength,
+      onChanged: widget.onChanged,
+      inputFormatters: widget.inputFormatters,
+      style: TextStyle(fontSize: 14, color: widget.textColor),
+      onFieldSubmitted: widget.onSubmitted,
+      onTap: widget.onTap,
+      validator: widget.validator,
+      maxLines: widget.isPassword ? 1 : widget.maxLines,
+      decoration: InputDecoration(
+        errorMaxLines: 2,
+        isDense: widget.isDense,
+        filled: true,
+        prefixIconConstraints: const BoxConstraints(
+          maxWidth: 30,
+          maxHeight: 30,
         ),
+        prefixIcon: widget.prefixIcon,
+        fillColor: widget.fillColor,
+
+        counterText: '',
+        contentPadding: .symmetric(
+          horizontal: widget.paddingHorizontal.w,
+          vertical: widget.paddingVertical.h,
+        ),
+        border: _buildBorder(),
+        enabledBorder: _buildBorder(),
+        focusedBorder: _buildBorder(),
+        disabledBorder: _buildBorder(),
+        errorBorder: _buildBorder(),
+        hintText: widget.hintText,
+        labelText: widget.labelText,
+        hintStyle: GoogleFonts.roboto(fontSize: 14, color: widget.hintTextColor),
+        labelStyle: GoogleFonts.roboto(
+          fontSize: 14,
+          color: widget.labelTextColor,
+        ),
+        prefix: CommonText(text: widget.prefixText ?? '', fontWeight: .w400),
+        suffixIcon: widget.isPassword
+            ? _buildPasswordSuffixIcon()
+            : widget.suffixIcon,
       ),
     );
   }
 
   OutlineInputBorder _buildBorder() {
     return OutlineInputBorder(
-      borderRadius: .circular(borderRadius.r),
+      borderRadius: .circular(widget.borderRadius.r),
       borderSide: BorderSide(
-        color: borderColor == AppColors.transparent
+        color: widget.borderColor == AppColors.transparent
             ? Colors.grey.withValues(alpha: 0.3)
-            : borderColor,
+            : widget.borderColor,
       ),
     );
   }
 
   Widget _buildPasswordSuffixIcon() {
     return GestureDetector(
-      onTap: toggle,
+      onTap: _toggle,
       child: Padding(
         padding: .only(right: 10.w),
-        child: Obx(
-          () => Icon(
-            obscureText.value
-                ? Icons.visibility_off_outlined
-                : Icons.visibility_outlined,
-            size: 20.sp,
-            color: textColor,
-          ),
+        child: Icon(
+          _obscureText
+              ? Icons.visibility_off_outlined
+              : Icons.visibility_outlined,
+          size: 20.sp,
+          color: widget.textColor,
         ),
       ),
     );
-  }
-
-  void toggle() {
-    obscureText.value = !obscureText.value;
   }
 }

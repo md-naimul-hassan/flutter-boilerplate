@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../../core/component/image/common_image.dart';
 import '../../../../core/component/text/common_text.dart';
@@ -49,7 +48,9 @@ class ChatBubbleMessage extends StatelessWidget {
               onTap: onTap,
               child: Container(
                 padding: .symmetric(horizontal: 14.w, vertical: 10.h),
-                constraints: BoxConstraints(maxWidth: Get.width * .7),
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * .7,
+                ),
                 decoration: BoxDecoration(
                   color: bubbleColor,
                   borderRadius: .circular(12.r),

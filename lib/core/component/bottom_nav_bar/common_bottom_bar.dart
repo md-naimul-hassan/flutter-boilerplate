@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../app/router.dart';
 import '../../../app/constants/app_colors.dart';
@@ -28,6 +27,7 @@ class CommonBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 80.h,
       width: MediaQuery.of(context).size.width,
       alignment: .center,
       padding: .all(12.sp),
@@ -65,19 +65,19 @@ class CommonBottomNavBar extends StatelessWidget {
     if (index == currentIndex) return;
     switch (index) {
       case 0:
-        Get.toNamed(AppRoutes.setting);
+        AppNavigator.toNamed(AppRoutes.setting);
         break;
 
       case 1:
-        Get.toNamed(AppRoutes.notifications);
+        AppNavigator.toNamed(AppRoutes.notifications);
         break;
 
       case 2:
-        Get.toNamed(AppRoutes.chat);
+        AppNavigator.toNamed(AppRoutes.chat);
         break;
 
       case 3:
-        Get.toNamed(AppRoutes.profile);
+        AppNavigator.toNamed(AppRoutes.profile);
         break;
 
       default:

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import '../../../../../app/constants/app_colors.dart';
 import '../../../../../app/constants/app_string.dart';
 import '../../../../../app/enum.dart';
 import '../../../../../app/router.dart';
+import '../../../../../app/di.dart';
 import '../../../../../core/component/button/common_button.dart';
 import '../../../../../core/component/text/common_text.dart';
 import '../../../../../core/component/text_field/common_text_field.dart';
@@ -46,7 +46,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       _newPasswordController.clear();
       _confirmPasswordController.clear();
       AppSnackbar.success(title: 'Success', message: state.message);
-      Get.back();
+      AppNavigator.back();
     } else if (state.status == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }
@@ -56,7 +56,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          ChangePasswordBloc(Get.find<ChangePasswordRemoteDataSource>()),
+          ChangePasswordBloc(sl<ChangePasswordRemoteDataSource>()),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -123,7 +123,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     Align(
                       alignment: .centerLeft,
                       child: InkWell(
-                        onTap: () => Get.toNamed(AppRoutes.forgotPassword),
+                        onTap: () =>
+                            AppNavigator.toNamed(AppRoutes.forgotPassword),
                         child: CommonText(
                           text: AppString.forgotPassword,
                           color: AppColors.primaryColor,

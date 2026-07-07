@@ -7,12 +7,16 @@ import '../../../../core/component/text_field/common_text_field.dart';
 import '../../../../app/constants/app_colors.dart';
 import '../../../../core/utils/extension.dart';
 import '../../../../core/utils/helpers/validation.dart';
-import '../controller/profile_controller.dart';
 
 class EditProfileAllFiled extends StatelessWidget {
-  final ProfileController controller;
+  const EditProfileAllFiled({
+    super.key,
+    required this.nameController,
+    required this.numberController,
+  });
 
-  const EditProfileAllFiled({super.key, required this.controller});
+  final TextEditingController nameController;
+  final TextEditingController numberController;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class EditProfileAllFiled extends StatelessWidget {
         120.height,
 
         CommonTextField(
-          controller: controller.nameController,
+          controller: nameController,
           validator: AppValidation.required,
           hintText: AppString.fullName,
           borderColor: AppColors.black,
@@ -40,8 +44,8 @@ class EditProfileAllFiled extends StatelessWidget {
         12.height,
 
         CommonPhoneNumberTextFiled(
-          controller: controller.numberController,
-          countryChange: (Country value) {}, // if supported
+          controller: numberController,
+          countryChange: (Country value) {},
         ),
       ],
     );

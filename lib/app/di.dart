@@ -1,28 +1,51 @@
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 
-import '../../features/auth/forgot password/presentation/controller/forget_password_controller.dart';
-import '../../features/message/presentation/controller/chat_controller.dart';
-import '../../features/message/presentation/controller/message_controller.dart';
-import '../../features/notifications/presentation/controller/notifications_controller.dart';
-import '../../features/profile/presentation/controller/profile_controller.dart';
-import '../../features/setting/presentation/controller/privacy_policy_controller.dart';
-import '../../features/setting/presentation/controller/setting_controller.dart';
-import '../../features/setting/presentation/controller/terms_of_services_controller.dart';
 import '../core/network/api_client.dart';
 import '../core/network/api_service.dart';
+import '../features/auth/change_password/data/datasources/remote_data_source.dart';
+import '../features/auth/forgot_password/data/datasources/remote_data_source.dart';
+import '../features/auth/forgot_password/presentation/bloc/bloc.dart';
+import '../features/auth/sign_up/data/datasources/remote_data_source.dart';
+import '../features/auth/sign_up/presentation/bloc/bloc.dart';
+import '../features/auth/sign_in/data/datasources/remote_data_source.dart';
+import '../features/message/data/datasources/remote_data_source.dart';
+import '../features/notifications/data/datasources/remote_data_source.dart';
+import '../features/profile/data/datasources/remote_data_source.dart';
 
-class DependencyInjection extends Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut<ApiClient>(() => DioApiClient(), fenix: true);
+/// Global service locator (replaces GetX dependency injection).
+final GetIt sl = GetIt.instance;
 
-    Get.lazyPut(() => ForgetPasswordController(), fenix: true);
-    Get.lazyPut(() => NotificationsController(), fenix: true);
-    Get.lazyPut(() => ChatController(), fenix: true);
-    Get.lazyPut(() => MessageController(), fenix: true);
-    Get.lazyPut(() => ProfileController(), fenix: true);
-    Get.lazyPut(() => SettingController(), fenix: true);
-    Get.lazyPut(() => PrivacyPolicyController(), fenix: true);
-    Get.lazyPut(() => TermsOfServicesController(), fenix: true);
-  }
+/// Registers app-wide dependencies. Call once before `runApp`.
+///
+/// Only long-lived, dependency-graph objects live here (network client,
+/// data sources, repositories, use cases). Blocs are created per-screen via
+/// `BlocProvider` and pull what they need from here.
+void dependencyInjection() {
+  // Core
+  sl.registerLazySingleton<ApiClient>(() => DioApiClient());
+
+  // Sign In
+  sl.registerLazySingleton(() => SignInRemoteDataSource(sl()));
+
+  // Change Password
+  sl.registerLazySingleton(() => ChangePasswordRemoteDataSource(sl()));
+
+  // Forgot Password
+  sl.registerLazySingleton(() => ForgotPasswordRemoteDataSource(sl()));
+
+  // Sign Up
+  sl.registerLazySingleton(() => SignUpRemoteDataSource(sl()));
+
+  // Message
+  sl.registerLazySingleton(() => MessageRemoteDataSource(sl()));
+
+  // Notifications
+  sl.registerLazySingleton(() => NotificationRemoteDataSource(sl()));
+
+  // Profile
+  sl.registerLazySingleton(() => ProfileRemoteDataSource(sl()));
+
+  // Multi-screen flow blocs (shared state across their screens).
+  sl.registerLazySingleton(() => SignUpBloc(sl()));
+  sl.registerLazySingleton(() => ForgotPasswordBloc(sl()));
 }
