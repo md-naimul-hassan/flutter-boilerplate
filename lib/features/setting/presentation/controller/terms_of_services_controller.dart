@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../../../../core/services/api/api_client.dart';
-import '../../../../core/services/api/api_service.dart';
+import '../../../../core/network/api_client.dart';
+import '../../../../core/network/api_service.dart';
 import '../../../../core/utils/enum.dart';
 import '../../data/model/html_model.dart';
 import '../../../../app/constants/api_end_point.dart';

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import '../../features/auth/change_password/presentation/screen/change_password_screen.dart';
+import '../features/auth/change_password/di/binding.dart';
+import '../features/auth/change_password/presentation/screen/screen.dart';
 import '../../features/auth/forgot password/presentation/screen/create_password.dart';
 import '../../features/auth/forgot password/presentation/screen/forgot_password.dart';
 import '../../features/auth/forgot password/presentation/screen/verify_screen.dart';
@@ -20,7 +21,7 @@ import '../../features/setting/presentation/screen/terms_of_services_screen.dart
 import '../../features/splash/splash_screen.dart';
 
 class AppRoutes {
-  static const String test = '/test_screen.dart';
+static const String test = '/test_screen.dart';
   static const String splash = '/';
   static const String onboarding = '/onboarding_screen.dart';
   static const String signUp = '/sign_up_screen.dart';
@@ -60,7 +61,11 @@ class AppRoutes {
     GetPage(name: forgotPassword, page: () => ForgotPasswordScreen()),
     GetPage(name: verifyEmail, page: () => VerifyScreen()),
     GetPage(name: createPassword, page: () => CreatePassword()),
-    GetPage(name: changePassword, page: () => ChangePasswordScreen()),
+    GetPage(
+      name: changePassword,
+      page: () => const ChangePasswordScreen(),
+      binding: ChangePasswordBinding(),
+    ),
     GetPage(name: notifications, page: () => const NotificationScreen()),
     GetPage(name: chat, page: () => const ChatListScreen()),
     GetPage(name: message, page: () => const MessageScreen()),

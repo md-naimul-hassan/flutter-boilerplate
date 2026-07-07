@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/services/api/api_client.dart';
-import '../../../../core/services/api/api_service.dart';
+import '../../../../core/network/api_client.dart';
+import '../../../../core/network/api_service.dart';
 import '../../../../core/services/socket/socket_service.dart';
 import '../../../../core/storeage/storage_services.dart';
 import '../../../../core/utils/enum.dart';

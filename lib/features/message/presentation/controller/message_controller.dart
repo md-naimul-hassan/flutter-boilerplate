@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/services/api/api_client.dart';
-import '../../../../core/services/api/api_service.dart';
+import '../../../../core/network/api_client.dart';
+import '../../../../core/network/api_service.dart';
 import '../../../../core/services/socket/socket_service.dart';
 import '../../../../core/storeage/storage_services.dart';
 import '../../../../core/utils/enum.dart';
@@ -103,7 +103,7 @@ class MessageController extends GetxController {
 
       await getMessages();
     } catch (e) {
-      errorLog(e.toString());
+      logError(e.toString());
     } finally {
       isMoreLoading = false;
       update();

@@ -61,7 +61,7 @@ class CommonImage extends StatelessWidget {
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) {
-        errorLog(error, source: 'Common Image');
+        logError(error);
 
         return _buildErrorWidget();
       },
@@ -86,7 +86,7 @@ class CommonImage extends StatelessWidget {
       width: size?.sp ?? width?.w,
       fit: fill,
       errorBuilder: (context, error, stackTrace) {
-        errorLog(error, source: 'Common Image');
+        logError(error);
         return _buildErrorWidget();
       },
     );

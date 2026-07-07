@@ -5,8 +5,8 @@ import 'package:intl_phone_field/countries.dart';
 import '../../../../../app/router.dart';
 import '../../../../../app/constants/api_end_point.dart';
 
-import '../../../../../core/services/api/api_client.dart';
-import '../../../../../core/services/api/api_service.dart';
+import '../../../../../core/network/api_client.dart';
+import '../../../../../core/network/api_service.dart';
 import '../../../../../core/storeage/storage_services.dart';
 import '../../../../../core/utils/helpers/other_helper.dart';
 import '../../../../../core/utils/app_snackbar.dart';

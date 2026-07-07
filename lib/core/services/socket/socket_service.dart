@@ -15,7 +15,7 @@ class SocketService {
   /// ================= CONNECT =================
   static void connect() {
     if (isConnected) return;
-    appLog('🔌 Initializing socket connection');
+    logInfo('🔌 Initializing socket connection');
 
     _socket = io.io(
       ApiEndPoint.socketUrl,
@@ -40,26 +40,26 @@ class SocketService {
     final socket = _socket;
     if (socket == null) return;
     socket
-      ..onConnect((_) => appLog('✅ Socket connected'))
-      ..onDisconnect((_) => appLog('⚠️ Socket disconnected'))
-      ..onReconnectAttempt((attempt) => appLog('🔄Reconnect attempt: $attempt'))
-      ..onReconnectFailed((_) => appLog('❌Reconnect failed(max attempts hit)'))
-      ..onConnectError((e) => appLog('❌ Connect error: $e'))
-      ..onError((e) => appLog('❌ Socket error: $e'));
+      ..onConnect((_) => logInfo('Socket connected'))
+      ..onDisconnect((_) => logWarning('Socket disconnected'))
+      ..onReconnectAttempt((attempt) => logWarning('Reconnect attempt: $attempt'))
+      ..onReconnectFailed((_) => logWarning('Reconnect failed(max attempts hit)'))
+      ..onConnectError((e) => logError(' Connect error: $e'))
+      ..onError((e) => logError('Socket error: $e'));
   }
 
   /// ================= USER NOTIFICATION =================
   static void _registerUserNotificationListener() {
     final userId = LocalStorage.user.id;
     if (_socket == null || userId.isEmpty) {
-      appLog('⚠️ User ID not available. Notification listener skipped.');
+      logWarning('User ID not available. Notification listener skipped.');
       return;
     }
     final event = 'user-notification::$userId';
     _socket!
       ..off(event) // Remove Previous listeners
       ..on(event, (data) {
-        appLog('📩 User notification: $data');
+        logDebug('User notification: $data');
         // NotificationService.show(...)
       });
   }
@@ -68,7 +68,7 @@ class SocketService {
   static void on(String event, void Function(dynamic data) handler) {
     final socket = _getConnectedSocket();
     if (socket == null) {
-      appLog('❌ Cannot listen. Socket not connected. Event: $event');
+      logError('Cannot listen. Socket not connected. Event: $event');
       return;
     }
 
@@ -81,7 +81,7 @@ class SocketService {
   static void emit(String event, dynamic data) {
     final socket = _getConnectedSocket();
     if (socket == null) {
-      appLog('❌ Emit failed. Socket not connected. Event: $event');
+      logError('Emit failed. Socket not connected. Event: $event');
       return;
     }
 
@@ -96,7 +96,7 @@ class SocketService {
   ) {
     final socket = _getConnectedSocket();
     if (socket == null) {
-      appLog('❌ EmitWithAck failed. Socket not connected. Event: $event');
+      logError('EmitWithAck failed. Socket not connected. Event: $event');
       return;
     }
 
@@ -107,7 +107,7 @@ class SocketService {
   static void disconnect() {
     final socket = _socket;
     if (socket == null) return;
-    appLog('🔌 Socket disconnected manually');
+    logInfo('🔌 Socket disconnected manually');
     socket
       ..clearListeners()
       ..disconnect();
@@ -121,7 +121,7 @@ class SocketService {
       return null;
     }
     if (!_socket!.connected) {
-      appLog('⚠️ Socket exists but not connected yet');
+      logInfo('Socket exists but not connected yet');
       return null;
     }
     return _socket;

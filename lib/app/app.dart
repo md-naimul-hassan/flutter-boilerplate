@@ -7,7 +7,6 @@ import 'package:untitled/app/theme.dart';
 
 import '../core/component/scroll_behavior/scroll_behavior.dart';
 import '../core/error/error_handler.dart';
-import '../core/services/socket/socket_service.dart';
 import '../core/storeage/storage_services.dart';
 import 'di.dart';
 
@@ -35,6 +34,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.fadeIn,
         transitionDuration: _routeTransitionDuration,
         getPages: AppRoutes.routes,
+        initialRoute: AppRoutes.changePassword,
         home: child,
       ),
     );
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         ]),
         LocalStorage.init(),
       ]);
-      Future.delayed(_socketStartupDelay, SocketService.connect);
+     // Future.delayed(_socketStartupDelay, SocketService.connect);
     } catch (error, stackTrace) {
       globalError(error, stackTrace);
     }

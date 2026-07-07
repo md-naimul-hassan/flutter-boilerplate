@@ -57,6 +57,8 @@ dependencies:
 #  geolocator: ^14.0.2
 
   path: any
+  logger: ^2.7.0
+  flutter_bloc: ^9.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

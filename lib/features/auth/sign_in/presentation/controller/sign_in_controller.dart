@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../app/router.dart';
+import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/utils/app_snackbar.dart';
-import '../../data/datasources/sign_in_remote_data_source.dart';
 import '../../domain/usecases/sign_in_usecase.dart';
 
 class SignInController extends GetxController {
@@ -30,7 +30,7 @@ class SignInController extends GetxController {
       emailController.clear();
       passwordController.clear();
       Get.offAllNamed(AppRoutes.profile);
-    } on SignInException catch (e) {
+    } on ApiException catch (e) {
       AppSnackbar.error(title: e.statusCode.toString(), message: e.message);
     } catch (e) {
       AppSnackbar.error(title: 'Error', message: e.toString());

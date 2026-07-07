@@ -60,7 +60,7 @@ class CommonBottomNavBar extends StatelessWidget {
   }
 
   Future<void> onTap(int index) async {
-    appLog(currentIndex, source: 'common bottom bar');
+    logInfo(currentIndex);
 
     if (index == currentIndex) return;
     switch (index) {
@@ -81,7 +81,7 @@ class CommonBottomNavBar extends StatelessWidget {
         break;
 
       default:
-        appLog('Invalid bottom bar index: $index');
+        logError('Invalid bottom bar index: $index');
     }
   }
 }

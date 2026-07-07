@@ -1,7 +1,7 @@
 
 import '../../../app/constants/api_end_point.dart';
-import '../../../core/services/api/api_client.dart';
-import '../../../core/services/api/api_service.dart';
+import '../../../core/network/api_client.dart';
+import '../../../core/network/api_service.dart';
 import '../data/model/notification_model.dart';
 
 Future<List<NotificationModel>> notificationRepository(int page) async {

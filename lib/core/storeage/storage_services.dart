@@ -43,13 +43,13 @@ class LocalStorage {
       _user = UserModel.fromJson(jsonDecode(userString));
     }
 
-    appLog(token, source: 'LocalStorage');
+    logInfo(token);
   }
 
   /// Save token
   static Future<void> saveToken(String? value) async {
     if (value == null || value.isEmpty) {
-      appLog(' Token is  : $value');
+      logInfo(' Token is  : $value');
       return;
     }
     token = value;
@@ -59,7 +59,7 @@ class LocalStorage {
   /// Save refresh token
   static Future<void> saveRefreshToken(String? value) async {
     if (value == null || value.isEmpty) {
-      appLog('Refresh Token is  : $value');
+      logInfo('Refresh Token is  : $value');
       return;
     }
     refreshToken = value;

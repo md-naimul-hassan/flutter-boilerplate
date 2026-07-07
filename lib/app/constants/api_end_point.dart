@@ -1,4 +1,5 @@
 class ApiEndPoint {
+    ApiEndPoint._();
   static const baseUrl = 'http://103.145.138.74:3000/api/v1';
   static const imageUrl = 'http://103.145.138.74:3000';
   static const socketUrl = 'http://103.145.138.74:3001';

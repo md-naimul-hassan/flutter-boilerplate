@@ -18,7 +18,7 @@ class ErrorScreen extends StatelessWidget {
         children: [
           20.height,
           const Text(
-            AppString.someThingWrong,
+            AppString.somethingIsWrong,
             style: TextStyle(
               fontWeight: .w500,
               fontSize: 16,

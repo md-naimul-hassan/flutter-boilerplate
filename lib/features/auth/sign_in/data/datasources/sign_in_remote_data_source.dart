@@ -1,5 +1,6 @@
 import '../../../../../app/constants/api_end_point.dart';
-import '../../../../../core/services/api/api_client.dart';
+import '../../../../../core/error/exceptions.dart';
+import '../../../../../core/network/api_client.dart';
 import '../models/auth_session_model.dart';
 
 abstract class SignInRemoteDataSource {
@@ -25,7 +26,7 @@ class SignInRemoteDataSourceImpl implements SignInRemoteDataSource {
     );
 
     if (!response.isSuccess) {
-      throw SignInException(response.message, response.statusCode);
+      throw ApiException(response.statusCode, response.message);
     }
 
     final data = (response.data['data'] as Map?)?.cast<String, dynamic>() ?? {};
@@ -33,11 +34,4 @@ class SignInRemoteDataSourceImpl implements SignInRemoteDataSource {
   }
 }
 
-class SignInException implements Exception {
-  final String message;
-  final int statusCode;
-  SignInException(this.message, this.statusCode);
 
-  @override
-  String toString() => message;
-}
