@@ -1,134 +1,322 @@
 # Flutter Boilerplate
 
-A robust and scalable Flutter boilerplate project designed to jumpstart mobile application development. This project comes pre-configured with essential libraries and a modular architecture to ensure maintainability and efficiency.
+A feature-first Flutter starter for mobile apps with authentication, messaging, notifications, and profile management. The project uses BLoC for state management, `go_router` for navigation, and Dio for REST API communication with Socket.IO for real-time chat.
 
-## 🚀 Features
+## Table of Contents
 
--   **State Management**: Utilizes [GetX](https://pub.dev/packages/get) for reactive state management, dependency injection, and route management.
--   **Networking**: Integrated [Dio](https://pub.dev/packages/dio) for handling API requests, complete with interceptors, standardized error handling, and pretty logging.
--   **Responsive Design**: Implements [Flutter ScreenUtil](https://pub.dev/packages/flutter_screenutil) to ensure UI consistency across different device sizes (design size: 428x926).
--   **Modular Architecture**: Organized by features (Auth, Message, Profile, etc.) to keep code decoupled and manageable.
--   **Local Storage**: Wrapper around [Shared Preferences](https://pub.dev/packages/shared_preferences) for persisting local data.
--   **Socket Integration**: Ready-to-use [Socket.io Client](https://pub.dev/packages/socket_io_client) for real-time communication.
--   **Utils & Helpers**: extensive collection of utility classes and extensions.
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Project](#running-the-project)
+- [Available Commands](#available-commands)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Build & Deployment](#build--deployment)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
 
-## 🛠 Tech Stack
+## Features
 
--   **Language**: Dart
--   **Framework**: Flutter
--   **State Management**: GetX
--   **Networking**: Dio, Pretty Dio Logger
--   **UI/UX**: Flutter ScreenUtil, Google Fonts, Flutter SVG, Cached Network Image
--   **Forms**: Intl Phone Field, Pin Code Fields, Image Picker
--   **Utilities**: Flutter Dotenv, Intl, Shared Preferences
+- **Authentication** — Sign up, email OTP verification, sign in, forgot password, reset password, and change password flows
+- **Onboarding & Splash** — Intro screens and an initial splash route
+- **Messaging** — Chat list and conversation screens with REST pagination and Socket.IO real-time updates
+- **Notifications** — Paginated notification list
+- **Profile** — View and edit profile, including optional image upload
+- **Settings** — Account deletion, privacy policy, and terms of service (HTML content)
+- **State management** — `flutter_bloc` with per-screen blocs and shared flow blocs registered in GetIt
+- **Networking** — Dio client with bearer token auth, cookie management, and debug request logging
+- **Local storage** — Token, refresh token, and user data persisted via SharedPreferences
+- **Responsive UI** — `flutter_screenutil` with a 428×926 design size, shared components, and Material 3 theme
+- **Error handling** — Global zone guard, centralized API error mapping, and dedicated error/no-internet screens
 
-## 📂 Project Structure
+## Tech Stack
 
-The project follows a feature-first structure:
+| Category | Packages |
+| --- | --- |
+| Language / SDK | Dart `^3.10.4`, Flutter |
+| State management | `flutter_bloc` |
+| Navigation | `go_router` |
+| Dependency injection | `get_it` |
+| Networking | `dio`, `dio_cookie_manager`, `cookie_jar`, `pretty_dio_logger` |
+| Real-time | `socket_io_client` |
+| UI | `flutter_screenutil`, `google_fonts`, `flutter_svg`, `cached_network_image`, `flutter_html` |
+| Forms & input | `intl_phone_field`, `pin_code_fields`, `image_picker` |
+| Storage | `shared_preferences` |
+| Utilities | `intl`, `mime`, `logger` |
+| Linting | `flutter_lints` |
+
+**Supported platforms:** Android, iOS, and Web (project metadata also includes desktop targets).
+
+## Project Structure
 
 ```text
-lib/
-├── component/          # Reusable UI components
-│   ├── bottom_nav_bar/ # Bottom navigation widget
-│   ├── button/         # Custom button widgets
-│   ├── image/          # Image handling widgets
-│   ├── text_field/     # Custom text input fields
-│   └── ...             # Other shared widgets (text, popups, etc.)
-├── config/             # App configuration
-│   ├── api/            # API endpoints & configuration
-│   ├── dependency/     # Dependency Injection (GetX bindings)
-│   ├── languages/      # Localization & translations
-│   ├── route/          # App Routes management
-│   └── theme/          # App Theme styling
-├── features/           # Feature-based modules
-│   ├── auth/           # Authentication (Login, Register, OTP)
-│   ├── message/        # Chat & Messaging features
-│   ├── notifications/  # Notification listing & handling
-│   ├── onboarding/     # Onboarding screens
-│   ├── profile/        # User profile & settings
-│   ├── setting/        # App settings
-│   └── splash/         # Splash screen logic
-├── services/           # External & Core services
-│   ├── api/            # Dio API client implementation
-│   ├── firebase/       # Firebase services integration
-│   ├── location/       # Geolocation services
-│   ├── notification/   # Push notification services
-│   ├── socket/         # Socket.io connection implementation
-│   └── storage/        # Local storage (SharedPrefs)
-├── utils/              # Helper utilities
-│   ├── constants/      # App constants (Assets, Strings, Dimens)
-│   ├── extensions/     # Dart extensions
-│   └── log/            # Logging utilities
-├── app.dart            # Main App Widget (ScreenUtil & Theme init)
-└── main.dart           # Application Entry Point
+flutter-boilerplate/
+├── android/                  # Android native project
+├── assets/
+│   ├── icons/
+│   └── images/
+├── ios/                      # iOS native project
+├── lib/
+│   ├── app/                  # App shell: theme, router, DI, constants
+│   │   └── constants/        # API endpoints, colors, images, strings
+│   ├── core/
+│   │   ├── component/        # Reusable UI (buttons, fields, loaders, bottom nav)
+│   │   ├── error/            # Exceptions, failures, global error handler
+│   │   ├── network/          # Dio client, interceptors, API response handling
+│   │   ├── secret_key/       # Placeholder keys for future integrations
+│   │   ├── services/socket/ # Socket.IO service
+│   │   ├── storage/          # SharedPreferences wrapper (LocalStorage)
+│   │   └── utils/            # Extensions, helpers, logging, snackbars
+│   ├── features/
+│   │   ├── auth/             # sign_in, sign_up, forgot_password, change_password
+│   │   ├── message/          # Chat list and messaging
+│   │   ├── notifications/
+│   │   ├── onboarding/
+│   │   ├── profile/
+│   │   ├── setting/
+│   │   └── splash/
+│   └── main.dart             # Entry point
+├── test/                     # Widget tests
+└── web/                      # Web entry point
 ```
 
+Each feature module typically follows a `data/` (remote data sources, models) and `presentation/` (screens, blocs, widgets) layout.
 
+## Prerequisites
 
-## 🔧 Flutter Version Management (FVM)
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) compatible with Dart `^3.10.4`
+- [FVM](https://fvm.app/) (recommended) — this project pins Flutter `3.44.1` in `.fvmrc`
+- Xcode (for iOS builds on macOS)
+- Android Studio / Android SDK (for Android builds)
+- A running backend API and Socket.IO server (see [Configuration](#configuration))
 
-This project adopts [FVM (Flutter Version Management)](https://fvm.app/) to ensure project stability and developer consistency.
+### Flutter Version Management (FVM)
 
-**Current Flutter Version:** `3.38.5`
+This project uses FVM to pin the Flutter SDK version across developers and environments.
 
-### Why we use FVM?
+**Pinned version:** `3.44.1` (`.fvmrc`)
 
-*   **Consistency:** Guarantees that every developer works with the exact same Flutter SDK version, eliminating "it works on my machine" issues caused by version mismatches.
-*   **Per-Project SDKs:** Allows this project to use a specific Flutter version without affecting your global Flutter installation or other projects.
-*   **Reproducibility:** Ensures that builds are reproducible across different environments (local dev, CI/CD).
-*   **Easy Upgrades:** managing SDK upgrades becomes explicit and safe, as the version is pinned in the configuration.
+```bash
+# Install FVM: https://fvm.app/documentation/getting-started/installation
+fvm install
+fvm use
+fvm flutter pub get
+```
 
+Use `fvm flutter` in place of `flutter` for all commands when FVM is enabled.
 
-## 🏁 Getting Started
+## Installation
 
-### Prerequisites
+1. **Clone the repository**
 
--   [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.10.4 or higher recommended)
--   Dart SDK
+   ```bash
+   git clone https://github.com/md-naimul-hassan/flutter-boilerplate.git
+   cd flutter-boilerplate
+   ```
 
-### Installation
+2. **Install dependencies**
 
-1.  **Clone the repository:**
+   ```bash
+   flutter pub get
+   ```
 
-    ```bash
-    git clone https://github.com/your-username/flutter-boilerplate.git
-    cd flutter-boilerplate
-    ```
+   With FVM:
 
-2.  **Install dependencies:**
+   ```bash
+   fvm flutter pub get
+   ```
 
-    ```bash
-    flutter pub get
-    ```
+3. **Configure the backend URL** — Update `lib/app/constants/api_end_point.dart` with your API and socket server addresses (see [Configuration](#configuration)).
 
-3.  **Environment Setup:**
+4. **Run the app**
 
-    Create a `.env` file in the root directory (if not already present) to configure your environment variables.
-    *Note: Check `lib/main.dart` or source code for required keys.*
+   ```bash
+   flutter run
+   ```
 
-4.  **Run the app:**
+## Configuration
 
-    ```bash
-    flutter run
-    ```
+This project does not use a `.env` file. Backend and integration settings are defined in source code.
 
-## 📦 Building
+### API & Socket URLs
 
-To build the application for production:
+Edit `lib/app/constants/api_end_point.dart`:
 
-**Android:**
+```dart
+static const baseUrl = 'http://YOUR_HOST:PORT/api/';
+static const imageUrl = 'http://YOUR_HOST:PORT';
+static const socketUrl = 'http://YOUR_HOST:PORT';
+```
+
+All REST paths are relative to `baseUrl`. The Dio client applies a 30-second connect/receive/send timeout and attaches a `Bearer` token from local storage on every request.
+
+### Secret keys (optional)
+
+`lib/core/secret_key/secret_key.dart` contains empty placeholders (`publishableKey`, `secretKey`, `paymentIntent`) for future payment or third-party integrations. These values are not used by the current codebase.
+
+### Android notes
+
+- Cleartext HTTP traffic is enabled (`android:usesCleartextTraffic="true"`) for local/non-HTTPS development.
+- Camera and media read permissions are declared for image picker usage.
+
+## Running the Project
+
+### Development
+
+```bash
+# List connected devices
+flutter devices
+
+# Run on a specific device
+flutter run -d <device_id>
+
+# Run in release mode
+flutter run --release
+```
+
+The app initializes in portrait orientation, loads persisted auth data, and connects to Socket.IO shortly after startup.
+
+### Production builds
+
+**Android APK**
+
 ```bash
 flutter build apk --release
 ```
 
-**iOS:**
+**Android App Bundle (Play Store)**
+
+```bash
+flutter build appbundle --release
+```
+
+**iOS**
+
 ```bash
 flutter build ios --release
 ```
 
-## 🤝 Contributing
+**iOS IPA (App Store / TestFlight)**
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+```bash
+flutter build ipa --release
+```
 
----
-*Generated based on project structure analysis.*
+## Available Commands
+
+This project has no custom npm/Makefile scripts. Use standard Flutter tooling:
+
+| Command | Description |
+| --- | --- |
+| `flutter pub get` | Install dependencies |
+| `flutter pub upgrade` | Upgrade dependencies |
+| `flutter analyze` | Run static analysis (`analysis_options.yaml`) |
+| `flutter test` | Run tests in `test/` |
+| `flutter run` | Run the app in debug mode |
+| `flutter build apk --release` | Build Android APK |
+| `flutter build appbundle --release` | Build Android App Bundle |
+| `flutter build ios --release` | Build iOS release |
+| `flutter build ipa --release` | Build iOS IPA |
+
+Prefix commands with `fvm` when using FVM (e.g. `fvm flutter analyze`).
+
+## API Endpoints
+
+Base URL is configured in `ApiEndPoint.baseUrl`. The following REST paths are used:
+
+| Method | Path | Feature |
+| --- | --- | --- |
+| `POST` | `auth/register` | Sign up |
+| `POST` | `auth/verify-otp` | Verify registration OTP |
+| `POST` | `auth/resend-otp` | Resend registration OTP |
+| `POST` | `auth/login` | Sign in |
+| `POST` | `auth/forgot-password` | Request password reset |
+| `POST` | `auth/verify-reset-otp` | Verify reset OTP |
+| `POST` | `auth/reset-password` | Reset password |
+| `PATCH` | `auth/change-password` | Change password |
+| `GET` | `users` | Profile (multipart update via `PATCH`-style multipart) |
+| `DELETE` | `users` | Delete account |
+| `GET` | `notifications?page={page}` | List notifications |
+| `GET` | `privacy-policies` | Privacy policy HTML |
+| `GET` | `terms-and-conditions` | Terms of service HTML |
+| `GET` | `chats?page={page}` | Chat list |
+| `GET` | `messages?chatId={id}&page={page}&limit=15` | Chat messages |
+
+### Socket.IO events
+
+| Event | Direction | Purpose |
+| --- | --- | --- |
+| `user-notification::{userId}` | Listen | User-specific notifications |
+| `update-chatlist::{userId}` | Listen | Chat list updates |
+| `new-message::{chatId}` | Listen | Incoming messages in a chat |
+| `add-new-message` | Emit (with ack) | Send a new message |
+
+### App routes
+
+Routes are defined in `lib/app/router.dart` (`AppRoutes`):
+
+`/`, `/onboarding`, `/sign-up-screen`, `/verify-user`, `/sign-in-screen`, `/forgot-password`, `/verify`, `/create-password`, `/change-password`, `/notifications`, `/chat`, `/message`, `/profile`, `/edit-profile`, `/privacy-policy`, `/terms-of-services`, `/setting-screen`
+
+## Testing
+
+Tests live in `test/`. Run them with:
+
+```bash
+flutter test
+```
+
+The project uses `flutter_test` and `flutter_lints` for analysis. Update or replace the default widget test in `test/widget_test.dart` to match the current app entry point (`MyApp`).
+
+## Build & Deployment
+
+GitHub Actions workflows in `.github/workflows/` deploy on pushes to the `production` branch:
+
+| Workflow | Platform | Output |
+| --- | --- | --- |
+| `flutter-play-store.yml` | Android | AAB uploaded to Google Play (internal track) |
+| `flutter-app-store.yml` | iOS | IPA uploaded to TestFlight |
+
+### CI secrets
+
+**Android (`flutter-play-store.yml`)**
+
+- `KEYSTORE_BASE64`
+- `STORE_PASSWORD`
+- `KEY_PASSWORD`
+- `KEY_ALIAS`
+- `PLAY_STORE_JSON`
+
+**iOS (`flutter-app-store.yml`)**
+
+- `IOS_P12_BASE64`
+- `IOS_P12_PASSWORD`
+- `IOS_PROVISION_PROFILE`
+- `APP_STORE_KEY_ID`
+- `APP_STORE_ISSUER_ID`
+- `APP_STORE_PRIVATE_KEY`
+
+> **Note:** CI workflows reference Flutter `3.38.5`, while `.fvmrc` pins `3.44.1`. Align these versions for consistent local and CI builds.
+
+## Troubleshooting
+
+| Issue | Suggestion |
+| --- | --- |
+| API requests fail on Android emulator/device | Confirm `baseUrl` in `api_end_point.dart` is reachable from the device. Use your machine's LAN IP instead of `localhost` when testing against a local server. |
+| Socket does not connect | Verify `socketUrl` matches your backend and that the user is logged in (user ID is required for notification listeners). |
+| HTTP blocked on Android | Cleartext traffic is enabled for development; use HTTPS in production or update network security config. |
+| FVM / Flutter version mismatch | Run `fvm install && fvm use` and ensure CI Flutter version matches `.fvmrc`. |
+| `flutter pub get` errors | Confirm Dart SDK `^3.10.4` and run `flutter doctor` to verify your environment. |
+
+## Contributing
+
+Contributions are welcome. Please open a pull request with a clear description of your changes.
+
+Ensure code passes analysis before submitting:
+
+```bash
+flutter analyze
+flutter test
+```
