@@ -14,7 +14,7 @@ class TermsOfServicesState {
   final HtmlModel data;
 
   TermsOfServicesState({
-    this.status = ApiStatus.success,
+    this.status = ApiStatus.initial,
     HtmlModel? data,
   }) : data = data ?? HtmlModel.fromJson({});
 

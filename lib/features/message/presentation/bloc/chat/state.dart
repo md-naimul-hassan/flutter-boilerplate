@@ -7,7 +7,7 @@ class ChatState {
   final bool isMoreLoading;
 
   const ChatState({
-    this.status = ApiStatus.success,
+    this.status = ApiStatus.initial,
     this.chats = const [],
     this.isMoreLoading = false,
   });

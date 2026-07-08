@@ -42,8 +42,12 @@ class SocketService {
     socket
       ..onConnect((_) => logInfo('Socket connected'))
       ..onDisconnect((_) => logWarning('Socket disconnected'))
-      ..onReconnectAttempt((attempt) => logWarning('Reconnect attempt: $attempt'))
-      ..onReconnectFailed((_) => logWarning('Reconnect failed(max attempts hit)'))
+      ..onReconnectAttempt(
+        (attempt) => logWarning('Reconnect attempt: $attempt'),
+      )
+      ..onReconnectFailed(
+        (_) => logWarning('Reconnect failed(max attempts hit)'),
+      )
       ..onConnectError((e) => logError(' Connect error: $e'))
       ..onError((e) => logError('Socket error: $e'));
   }
@@ -73,8 +77,19 @@ class SocketService {
     }
 
     socket
-      ..off(event) // Remove Previous listeners
+      ..off(event)
       ..on(event, handler);
+  }
+
+  /// ================= LISTEN =================
+  static void off(String event) {
+    final socket = _getConnectedSocket();
+    if (socket == null) {
+      logError('Cannot listen. Socket not connected. Event: $event');
+      return;
+    }
+
+    socket.off(event);
   }
 
   /// ================= EMIT =================

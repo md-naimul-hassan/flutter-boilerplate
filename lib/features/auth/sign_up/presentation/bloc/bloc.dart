@@ -73,11 +73,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     ResendOtpRequested event,
     Emitter<SignUpState> emit,
   ) async {
-    add(SignUpTimerStarted());
-
     try {
       final token = await _remote.resendOtp(email: event.email);
       emit(state.copyWith(signUpStatus: ApiStatus.success, signUpToken: token));
+      add(SignUpTimerStarted());
     } on ApiException catch (e) {
       emit(state.copyWith(signUpStatus: ApiStatus.failure, message: e.message));
     } catch (e) {

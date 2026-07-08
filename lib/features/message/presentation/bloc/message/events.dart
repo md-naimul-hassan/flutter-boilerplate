@@ -9,6 +9,12 @@ class MessageStarted extends MessageEvent {
   MessageStarted({required this.chatId, required this.name});
 }
 
+class MessageClosed extends MessageEvent {
+  final String chatId;
+
+  MessageClosed({required this.chatId});
+}
+
 class MessageLoadMore extends MessageEvent {}
 
 class MessageSent extends MessageEvent {

@@ -78,6 +78,10 @@ class MessageRemoteDataSource {
     });
   }
 
+  void stopListenNewMessages(String chatId) {
+    SocketService.off('new-message::$chatId');
+  }
+
   ChatMessageModel _toChatMessage(MessageModel model, {bool? isMe}) {
     return ChatMessageModel(
       time: model.createdAt.toLocal(),

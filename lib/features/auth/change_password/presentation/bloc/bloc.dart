@@ -17,6 +17,7 @@ class ChangePasswordBloc
     ChangePasswordSubmitted event,
     Emitter<ChangePasswordState> emit,
   ) async {
+    if (state.status == ApiStatus.loading) return;
     emit(state.copyWith(status: ApiStatus.loading));
 
     try {

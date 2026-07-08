@@ -53,6 +53,7 @@ class _MessageScreenState extends State<MessageScreen> {
   void dispose() {
     _scrollController.dispose();
     _messageController.dispose();
+    _bloc.add(MessageClosed(chatId: widget.chatId));
     _bloc.close();
     super.dispose();
   }

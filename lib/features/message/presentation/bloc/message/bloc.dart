@@ -13,6 +13,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
 
   MessageBloc(this._remote) : super(const MessageState()) {
     on<MessageStarted>(_onStarted);
+    on<MessageClosed>(_onClosed);
     on<MessageLoadMore>(_onLoadMore);
     on<MessageSent>(_onSent);
     on<MessageReceived>(_onReceived);
@@ -29,6 +30,14 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
       (message) => add(MessageReceived(message)),
     );
     await _fetch(emit, initial: true);
+  }
+
+  Future<void> _onClosed(
+    MessageClosed event,
+    Emitter<MessageState> emit,
+  ) async {
+    _chatId = event.chatId;
+    _remote.stopListenNewMessages(event.chatId);
   }
 
   Future<void> _onLoadMore(

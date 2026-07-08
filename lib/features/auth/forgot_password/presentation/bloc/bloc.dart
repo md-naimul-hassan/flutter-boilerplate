@@ -46,6 +46,7 @@ class ForgotPasswordBloc
     ForgotVerifyOtpRequested event,
     Emitter<ForgotPasswordState> emit,
   ) async {
+    if (state.verifyStatus == ApiStatus.loading) return;
     emit(state.copyWith(verifyStatus: ApiStatus.loading));
 
     try {
@@ -69,6 +70,7 @@ class ForgotPasswordBloc
     ForgotResetPasswordRequested event,
     Emitter<ForgotPasswordState> emit,
   ) async {
+    if (state.resetStatus == ApiStatus.loading) return;
     emit(state.copyWith(resetStatus: ApiStatus.loading));
 
     try {
