@@ -1,6 +1,6 @@
-import 'package:untitled/core/error/exceptions.dart';
 
 import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_client.dart';
 import '../models/html_model.dart';
 

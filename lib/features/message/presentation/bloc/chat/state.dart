@@ -1,19 +1,19 @@
-import '../../../../../core/utils/enum.dart';
+import '../../../../../app/enum.dart';
 import '../../../data/models/chat_list_model.dart';
 
 class ChatState {
-  final Status status;
+  final ApiStatus status;
   final List<ChatModel> chats;
   final bool isMoreLoading;
 
   const ChatState({
-    this.status = Status.completed,
+    this.status = ApiStatus.success,
     this.chats = const [],
     this.isMoreLoading = false,
   });
 
   ChatState copyWith({
-    Status? status,
+    ApiStatus? status,
     List<ChatModel>? chats,
     bool? isMoreLoading,
   }) {

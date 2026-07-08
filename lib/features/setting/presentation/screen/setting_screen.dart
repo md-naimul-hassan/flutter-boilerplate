@@ -8,6 +8,7 @@ import '../../../../app/constants/app_string.dart';
 import '../../../../core/component/bottom_nav_bar/common_bottom_bar.dart';
 import '../../../../core/component/pop_up/common_pop_menu.dart';
 import '../../../../core/component/text/common_text.dart';
+import '../../../../core/storage/storage_services.dart';
 import '../../../../core/utils/app_snackbar.dart';
 import '../../data/datasources/remote_data_source.dart';
 import '../bloc/setting_bloc.dart';
@@ -32,7 +33,7 @@ class _SettingScreenState extends State<SettingScreen> {
   void _onStateChanged(BuildContext context, SettingState state) {
     if (state.status == ApiStatus.success) {
       _passwordController.clear();
-      AppNavigator.offAllNamed(AppRoutes.signIn);
+      LocalStorage.logout();
     } else if (state.status == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }

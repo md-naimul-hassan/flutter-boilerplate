@@ -1,4 +1,4 @@
-name: untitled
+name: flutter_boilerplate
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -49,7 +49,6 @@ dependencies:
   pin_code_fields: ^8.0.1
   intl: ^0.20.2
   flutter_html: ^3.0.0
-  flutter_dotenv: ^6.0.0
   dio_cookie_manager: ^3.3.0
   cookie_jar: ^4.0.8
 #  geocoding: ^4.0.0

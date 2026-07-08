@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:untitled/core/error/exceptions.dart';
 
 import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/services/socket/socket_service.dart';
-import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/storage/storage_services.dart';
 import '../models/chat_list_model.dart';
 import '../models/chat_message_model.dart';
 import '../models/message_model.dart';
@@ -17,7 +17,7 @@ class MessageRemoteDataSource {
   Future<List<ChatModel>> fetchChats(int page) async {
     final response = await _apiClient.get('${ApiEndPoint.chats}?page=$page');
 
-    if (response.isSuccess) {
+    if (!response.isSuccess) {
       throw ApiException(response.statusCode, response.message);
     }
 
@@ -33,7 +33,7 @@ class MessageRemoteDataSource {
       '${ApiEndPoint.messages}?chatId=$chatId&page=$page&limit=15',
     );
 
-    if (response.isSuccess) {
+    if (!response.isSuccess) {
       throw ApiException(response.statusCode, response.message);
     }
 

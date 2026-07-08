@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../storeage/storage_services.dart';
+import '../storage/storage_services.dart';
 
 
 class AuthInterceptor extends InterceptorsWrapper {

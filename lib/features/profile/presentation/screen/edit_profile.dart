@@ -9,7 +9,7 @@ import '../../../../app/constants/app_string.dart';
 import '../../../../core/component/button/common_button.dart';
 import '../../../../core/component/image/common_image.dart';
 import '../../../../core/component/text/common_text.dart';
-import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/storage/storage_services.dart';
 import '../../../../app/constants/app_images.dart';
 import '../../../../core/utils/app_snackbar.dart';
 import '../../../../core/utils/extension.dart';
@@ -17,7 +17,7 @@ import '../../data/datasources/remote_data_source.dart';
 import '../bloc/bloc.dart';
 import '../bloc/events.dart';
 import '../bloc/state.dart';
-import '../widgets/edit_profile_all_filed.dart';
+import '../widgets/edit_profile_all_field.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});

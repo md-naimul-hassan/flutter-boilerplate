@@ -9,7 +9,7 @@ import '../../../../core/component/image/common_image.dart';
 import '../../../../core/component/other_widgets/item.dart';
 import '../../../../core/component/pop_up/common_pop_menu.dart';
 import '../../../../core/component/text/common_text.dart';
-import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/storage/storage_services.dart';
 import '../../../../core/utils/extension.dart';
 import '../../data/datasources/remote_data_source.dart';
 import '../bloc/bloc.dart';
@@ -40,7 +40,6 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   16.height,
-                  const CommonText(text: 'aslkfjskldfjkldsjlj'),
 
                   CircleAvatar(
                     backgroundColor: Colors.transparent,

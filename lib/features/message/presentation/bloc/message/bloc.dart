@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/storeage/storage_services.dart';
-import '../../../../../core/utils/enum.dart';
+import '../../../../../app/enum.dart';
+import '../../../../../core/storage/storage_services.dart';
 import '../../../data/models/chat_message_model.dart';
 import './events.dart';
 import './state.dart';
@@ -36,7 +35,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     MessageLoadMore event,
     Emitter<MessageState> emit,
   ) async {
-    if (state.isMoreLoading || state.status == Status.loading) return;
+    if (state.isMoreLoading || state.status == ApiStatus.loading) return;
     emit(state.copyWith(isMoreLoading: true));
     await _fetch(emit);
     emit(state.copyWith(isMoreLoading: false));
@@ -47,7 +46,9 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     bool initial = false,
   }) async {
     try {
-      if (initial) emit(state.copyWith(status: Status.loading, messages: []));
+      if (initial) {
+        emit(state.copyWith(status: ApiStatus.loading, messages: []));
+      }
 
       final newMessages = await _remote.fetchMessages(
         chatId: _chatId,
@@ -57,12 +58,12 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
       _page++;
       emit(
         state.copyWith(
-          status: Status.completed,
+          status: ApiStatus.success,
           messages: [...state.messages, ...newMessages],
         ),
       );
     } catch (_) {
-      emit(state.copyWith(status: Status.error));
+      emit(state.copyWith(status: ApiStatus.failure));
     }
   }
 

@@ -1,6 +1,6 @@
-import 'package:untitled/core/error/exceptions.dart';
 
 import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_client.dart';
 import '../models/notification_model.dart';
 
@@ -14,7 +14,7 @@ class NotificationRemoteDataSource {
       '${ApiEndPoint.notifications}?page=$page',
     );
 
-    if (response.isSuccess) {
+    if (!response.isSuccess) {
       throw ApiException(response.statusCode, response.message);
     }
 

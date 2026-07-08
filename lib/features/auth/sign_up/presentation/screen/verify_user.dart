@@ -126,7 +126,7 @@ class _VerifyUserState extends State<VerifyUser> {
                     GestureDetector(
                       onTap: state.time == '00:00'
                           ? () => context.read<SignUpBloc>().add(
-                              SignUpResendRequested(),
+                              ResendOtpRequested(email: state.email),
                             )
                           : () {},
                       child: CommonText(

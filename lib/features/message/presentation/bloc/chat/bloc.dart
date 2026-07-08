@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/utils/enum.dart';
+import '../../../../../app/enum.dart';
 import 'events.dart';
 import 'state.dart';
 import '../../../data/datasources/remote_data_source.dart';
@@ -21,7 +21,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   Future<void> _onLoadMore(ChatLoadMore event, Emitter<ChatState> emit) async {
-    if (state.isMoreLoading || state.status == Status.loading) return;
+    if (state.isMoreLoading || state.status == ApiStatus.loading) return;
     emit(state.copyWith(isMoreLoading: true));
     await _fetch(emit);
     emit(state.copyWith(isMoreLoading: false));
@@ -38,24 +38,24 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   void _onListUpdated(ChatListUpdated event, Emitter<ChatState> emit) {
     _page = 1;
-    emit(state.copyWith(status: Status.completed, chats: event.chats));
+    emit(state.copyWith(status: ApiStatus.success, chats: event.chats));
   }
 
   Future<void> _fetch(Emitter<ChatState> emit, {bool initial = false}) async {
     try {
-      if (initial) emit(state.copyWith(status: Status.loading));
+      if (initial) emit(state.copyWith(status: ApiStatus.loading));
 
       final newChats = await _remote.fetchChats(_page);
 
       _page++;
       emit(
         state.copyWith(
-          status: Status.completed,
+          status: ApiStatus.success,
           chats: [...state.chats, ...newChats],
         ),
       );
     } catch (_) {
-      emit(state.copyWith(status: Status.error));
+      emit(state.copyWith(status: ApiStatus.failure));
     }
   }
 }

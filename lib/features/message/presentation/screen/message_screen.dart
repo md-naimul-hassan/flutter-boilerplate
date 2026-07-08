@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../app/di.dart';
 import '../../../../app/constants/app_string.dart';
+import '../../../../app/enum.dart';
 import '../../../../core/component/image/common_image.dart';
 import '../../../../core/component/text/common_text.dart';
 import '../../../../core/component/text_field/common_text_field.dart';
-import '../../../../core/utils/enum.dart';
 import '../../../../core/utils/extension.dart';
 import '../../data/datasources/remote_data_source.dart';
 import '../../data/models/chat_message_model.dart';
@@ -85,7 +85,7 @@ class _MessageScreenState extends State<MessageScreen> {
                 ],
               ),
             ),
-            body: state.status == Status.loading
+            body: state.status == ApiStatus.loading
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
                     reverse: true,

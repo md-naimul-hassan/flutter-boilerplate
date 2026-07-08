@@ -1,7 +1,7 @@
 import '../../../../../app/constants/api_end_point.dart';
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/network/api_client.dart';
-import '../../../../../core/storeage/storage_services.dart';
+import '../../../../../core/storage/storage_services.dart';
 
 class SignInRemoteDataSource {
   final ApiClient _apiClient;
@@ -20,7 +20,7 @@ class SignInRemoteDataSource {
 
     final Map<String, dynamic> data = response.data['data'] ?? {};
 
-    Future.wait([
+   await Future.wait([
       LocalStorage.saveToken(data['accessToken']),
       LocalStorage.saveRefreshToken(data['refreshToken']),
       LocalStorage.saveUser(data['user']),

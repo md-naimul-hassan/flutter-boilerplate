@@ -1,6 +1,7 @@
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../app/constants/api_end_point.dart';
 import '../utils/logger.dart';
@@ -24,7 +25,7 @@ class DioConfig {
     dio.interceptors.addAll([
       AuthInterceptor(),
       CookieManager(cookieJar),
-      apiLog(),
+      if (kDebugMode) apiLog(),
     ]);
 
     return dio;

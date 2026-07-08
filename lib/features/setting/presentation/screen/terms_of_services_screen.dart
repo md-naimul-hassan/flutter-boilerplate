@@ -4,10 +4,10 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../app/di.dart';
 import '../../../../app/constants/app_string.dart';
+import '../../../../app/enum.dart';
 import '../../../../core/component/other_widgets/common_loader.dart';
 import '../../../../core/component/screen/error_screen.dart';
 import '../../../../core/component/text/common_text.dart';
-import '../../../../core/utils/enum.dart';
 import '../../data/datasources/remote_data_source.dart';
 import '../bloc/terms_of_services_bloc.dart';
 
@@ -30,13 +30,14 @@ class TermsOfServicesScreen extends StatelessWidget {
         ),
         body: BlocBuilder<TermsOfServicesBloc, TermsOfServicesState>(
           builder: (context, state) => switch (state.status) {
-            Status.loading => const CommonLoader(),
-            Status.error => ErrorScreen(
+            ApiStatus.initial => const SizedBox.shrink(),
+            ApiStatus.loading => const CommonLoader(),
+            ApiStatus.failure => ErrorScreen(
               onTap: () => context.read<TermsOfServicesBloc>().add(
                 TermsOfServicesRequested(),
               ),
             ),
-            Status.completed => SingleChildScrollView(
+            ApiStatus.success => SingleChildScrollView(
               padding: .symmetric(vertical: 24.h, horizontal: 20.w),
               child: Html(data: state.data.content),
             ),

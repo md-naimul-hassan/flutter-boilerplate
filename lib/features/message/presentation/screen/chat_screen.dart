@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../app/enum.dart';
 import '../../../../app/router.dart';
 import '../../../../app/di.dart';
 import '../../../../app/constants/app_string.dart';
@@ -9,7 +10,6 @@ import '../../../../core/component/other_widgets/common_loader.dart';
 import '../../../../core/component/screen/error_screen.dart';
 import '../../../../core/component/text/common_text.dart';
 import '../../../../core/component/text_field/common_text_field.dart';
-import '../../../../core/utils/enum.dart';
 import '../../data/datasources/remote_data_source.dart';
 import '../../data/models/chat_list_model.dart';
 import '../bloc/chat/bloc.dart';
@@ -23,7 +23,8 @@ class ChatListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ChatBloc(sl<MessageRemoteDataSource>())..add(ChatStarted()),
+      create: (_) =>
+          ChatBloc(sl<MessageRemoteDataSource>())..add(ChatStarted()),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -35,11 +36,14 @@ class ChatListScreen extends StatelessWidget {
         ),
         body: BlocBuilder<ChatBloc, ChatState>(
           builder: (context, state) => switch (state.status) {
-            Status.loading => const CommonLoader(),
-            Status.error => ErrorScreen(
+            ApiStatus.initial => const SizedBox.shrink(),
+            ApiStatus.loading => const CommonLoader(),
+            ApiStatus.failure => ErrorScreen(
               onTap: () => context.read<ChatBloc>().add(ChatStarted()),
             ),
-            Status.completed => _ChatList(state: state),
+            ApiStatus.success => _ChatList(state: state),
+
+            // TODO: Handle this case.
           },
         ),
         bottomNavigationBar: const CommonBottomNavBar(currentIndex: 2),

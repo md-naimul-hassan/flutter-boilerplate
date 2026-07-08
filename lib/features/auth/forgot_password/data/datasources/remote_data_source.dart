@@ -30,7 +30,7 @@ class ForgotPasswordRemoteDataSource {
       throw ApiException(response.statusCode, response.message);
     }
 
-    final Map<String, dynamic> data = response.data['data'];
+    final Map<String, dynamic> data = response.data['data'] ?? {};
     return data['forgetPasswordToken'] ?? '';
   }
 

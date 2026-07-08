@@ -1,7 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 class SecretKey {
-  static final String publishableKey = dotenv.env['STRIPEPUBLISHABLEKEY'] ?? '';
-  static final String secretKey = dotenv.env['STRIPESCERETKEY'] ?? '';
-  static final String paymentIntent = dotenv.env['STRIPEPAYMENTINTENT'] ?? '';
+  static final String publishableKey = '';
+  static final String secretKey = '';
+  static final String paymentIntent = '';
 }

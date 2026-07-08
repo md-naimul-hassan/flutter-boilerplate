@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_boilerplate/core/services/socket/socket_service.dart';
 
 import '../../../../../app/enum.dart';
 import '../../../../../core/error/exceptions.dart';
@@ -23,6 +24,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
     try {
       await _remote.signIn(email: event.email, password: event.password);
+      SocketService.connect();
       emit(state.copyWith(status: ApiStatus.success));
     } on ApiException catch (e) {
       emit(state.copyWith(status: ApiStatus.failure, message: e.message));

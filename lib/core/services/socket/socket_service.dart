@@ -1,7 +1,7 @@
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../../../app/constants/api_end_point.dart';
-import '../../storeage/storage_services.dart';
+import '../../storage/storage_services.dart';
 import '../../utils/logger.dart';
 
 class SocketService {

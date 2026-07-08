@@ -5,7 +5,8 @@ import '../../data/datasources/remote_data_source.dart';
 import 'events.dart';
 import 'state.dart';
 
-class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> {
+class ChangePasswordBloc
+    extends Bloc<ChangePasswordEvent, ChangePasswordState> {
   final ChangePasswordRemoteDataSource _remote;
 
   ChangePasswordBloc(this._remote) : super(const ChangePasswordState()) {
@@ -23,23 +24,11 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
         oldPassword: event.oldPassword,
         newPassword: event.newPassword,
       );
-      emit(
-        state.copyWith(status: ApiStatus.success, message: message),
-      );
+      emit(state.copyWith(status: ApiStatus.success, message: message));
     } on ApiException catch (e) {
-      emit(
-        state.copyWith(
-          status: ApiStatus.failure,
-          message: e.message,
-        ),
-      );
+      emit(state.copyWith(status: ApiStatus.failure, message: e.message));
     } catch (e) {
-      emit(
-        state.copyWith(
-          status: ApiStatus.failure,
-          message: e.toString(),
-        ),
-      );
+      emit(state.copyWith(status: ApiStatus.failure, message: e.toString()));
     }
   }
 }

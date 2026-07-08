@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:untitled/app/router.dart';
-import 'package:untitled/app/theme.dart';
+import '../app/router.dart';
+import '../app/theme.dart';
 
 import '../core/component/scroll_behavior/scroll_behavior.dart';
 import '../core/error/error_handler.dart';
-import '../core/storeage/storage_services.dart';
+import '../core/services/socket/socket_service.dart';
+import '../core/storage/storage_services.dart';
 import '../core/utils/app_snackbar.dart';
 
 class MyApp extends StatelessWidget {
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         ]),
         LocalStorage.init(),
       ]);
+      Future.delayed(const Duration(milliseconds: 300), () {
+        SocketService.connect();
+      });
     } catch (error, stackTrace) {
       globalError(error, stackTrace);
     }

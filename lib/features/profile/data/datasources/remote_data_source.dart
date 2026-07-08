@@ -1,7 +1,8 @@
 import '../../../../app/constants/api_end_point.dart';
+import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/network/multipart_helper.dart';
-import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/storage/storage_services.dart';
 
 class ProfileRemoteDataSource {
   final ApiClient _apiClient;
@@ -24,7 +25,7 @@ class ProfileRemoteDataSource {
     );
 
     if (!response.isSuccess) {
-      throw Exception(response.message);
+      throw ApiException(response.statusCode, response.message);
     }
 
     final Map<String, dynamic> data = response.data['data'] ?? {};

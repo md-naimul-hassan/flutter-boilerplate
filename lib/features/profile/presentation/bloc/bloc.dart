@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/enum.dart';
-import '../../../../core/storeage/storage_services.dart';
+import '../../../../core/storage/storage_services.dart';
 import '../../../../core/utils/helpers/other_helper.dart';
 import '../../data/datasources/remote_data_source.dart';
 import 'events.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/utils/enum.dart';
+import '../../../../app/enum.dart';
 import '../../data/datasources/remote_data_source.dart';
 import '../../data/models/html_model.dart';
 
@@ -11,15 +10,15 @@ class TermsOfServicesRequested extends TermsOfServicesEvent {}
 
 /// State
 class TermsOfServicesState {
-  final Status status;
+  final ApiStatus status;
   final HtmlModel data;
 
   TermsOfServicesState({
-    this.status = Status.completed,
+    this.status = ApiStatus.success,
     HtmlModel? data,
   }) : data = data ?? HtmlModel.fromJson({});
 
-  TermsOfServicesState copyWith({Status? status, HtmlModel? data}) {
+  TermsOfServicesState copyWith({ApiStatus? status, HtmlModel? data}) {
     return TermsOfServicesState(
       status: status ?? this.status,
       data: data ?? this.data,
@@ -40,13 +39,13 @@ class TermsOfServicesBloc
     TermsOfServicesRequested event,
     Emitter<TermsOfServicesState> emit,
   ) async {
-    emit(state.copyWith(status: Status.loading));
+    emit(state.copyWith(status: ApiStatus.loading));
 
     try {
       final data = await _remote.fetchTermsOfServices();
-      emit(state.copyWith(status: Status.completed, data: data));
+      emit(state.copyWith(status: ApiStatus.success, data: data));
     } catch (_) {
-      emit(state.copyWith(status: Status.error));
+      emit(state.copyWith(status: ApiStatus.failure));
     }
   }
 }

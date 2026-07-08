@@ -17,7 +17,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   SignUpBloc(this._remote) : super(const SignUpState()) {
     on<SignUpSubmitted>(_onSubmitted);
     on<SignUpOtpSubmitted>(_onOtpSubmitted);
-    on<SignUpResendRequested>(_onResend);
+    on<ResendOtpRequested>(_onResend);
     on<SignUpTimerStarted>(_onTimerStarted);
     on<SignUpTicked>(_onTicked);
   }
@@ -70,11 +70,21 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   Future<void> _onResend(
-    SignUpResendRequested event,
+    ResendOtpRequested event,
     Emitter<SignUpState> emit,
   ) async {
     add(SignUpTimerStarted());
-    add(SignUpSubmitted(name: '', email: state.email, password: ''));
+
+    try {
+      final token = await _remote.resendOtp(email: event.email);
+      emit(state.copyWith(signUpStatus: ApiStatus.success, signUpToken: token));
+    } on ApiException catch (e) {
+      emit(state.copyWith(signUpStatus: ApiStatus.failure, message: e.message));
+    } catch (e) {
+      emit(
+        state.copyWith(signUpStatus: ApiStatus.failure, message: e.toString()),
+      );
+    }
   }
 
   Future<void> _onTimerStarted(

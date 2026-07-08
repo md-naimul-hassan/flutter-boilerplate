@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../app/router.dart';
 import '../../../app/constants/app_colors.dart';
 import '../../../app/constants/app_string.dart';
-import '../../storeage/storage_services.dart';
+import '../../storage/storage_services.dart';
 import '../../utils/helpers/validation.dart';
 import '../button/common_button.dart';
 import '../text/common_text.dart';

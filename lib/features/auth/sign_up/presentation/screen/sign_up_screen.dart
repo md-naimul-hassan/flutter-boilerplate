@@ -12,8 +12,8 @@ import '../../../../../core/utils/extension.dart';
 import '../bloc/bloc.dart';
 import '../bloc/events.dart';
 import '../bloc/state.dart';
-import '../widget/already_accunt_rich_text.dart';
-import '../widget/sign_up_all_filed.dart';
+import '../widget/already_account_rich_text.dart';
+import '../widget/sign_up_all_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
