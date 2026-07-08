@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../app/constants/api_end_point.dart';
 import '../../../../app/enum.dart';
-import '../../../../core/network/api_client.dart';
+import '../../data/datasources/remote_data_source.dart';
 
 /// Events
 sealed class SettingEvent {}
@@ -29,9 +28,9 @@ class SettingState {
 
 /// Bloc
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
-  final ApiClient _apiClient;
+  final SettingRemoteDataSource _remote;
 
-  SettingBloc(this._apiClient) : super(const SettingState()) {
+  SettingBloc(this._remote) : super(const SettingState()) {
     on<SettingDeleteAccountRequested>(_onDeleteAccount);
   }
 
@@ -53,15 +52,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     emit(state.copyWith(status: ApiStatus.loading));
 
     try {
-      final response = await _apiClient.delete(
-        ApiEndPoint.user,
-        body: {'password': password},
-      );
-
-      if (!response.isSuccess) {
-        throw Exception(response.message);
-      }
-
+      await _remote.deleteAccount(password);
       emit(state.copyWith(status: ApiStatus.success));
     } catch (e) {
       emit(state.copyWith(status: ApiStatus.failure, message: e.toString()));

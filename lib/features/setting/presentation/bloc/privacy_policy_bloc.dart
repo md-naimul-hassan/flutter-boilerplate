@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../app/constants/api_end_point.dart';
-import '../../../../core/network/api_client.dart';
 import '../../../../core/utils/enum.dart';
-import '../../data/model/html_model.dart';
+import '../../data/datasources/remote_data_source.dart';
+import '../../data/models/html_model.dart';
 
 /// Events
 sealed class PrivacyPolicyEvent {}
@@ -30,9 +29,9 @@ class PrivacyPolicyState {
 
 /// Bloc
 class PrivacyPolicyBloc extends Bloc<PrivacyPolicyEvent, PrivacyPolicyState> {
-  final ApiClient _apiClient;
+  final SettingRemoteDataSource _remote;
 
-  PrivacyPolicyBloc(this._apiClient) : super(PrivacyPolicyState()) {
+  PrivacyPolicyBloc(this._remote) : super(PrivacyPolicyState()) {
     on<PrivacyPolicyRequested>(_onRequested);
   }
 
@@ -43,18 +42,8 @@ class PrivacyPolicyBloc extends Bloc<PrivacyPolicyEvent, PrivacyPolicyState> {
     emit(state.copyWith(status: Status.loading));
 
     try {
-      final response = await _apiClient.get(ApiEndPoint.privacyPolicies);
-
-      if (response.statusCode != 200) {
-        throw Exception(response.message);
-      }
-
-      final Map<String, dynamic> rawData = response.data['data'] ?? {};
-      final Map<String, dynamic> raw = rawData['attributes'] ?? {};
-
-      emit(
-        state.copyWith(status: Status.completed, data: HtmlModel.fromJson(raw)),
-      );
+      final data = await _remote.fetchPrivacyPolicy();
+      emit(state.copyWith(status: Status.completed, data: data));
     } catch (_) {
       emit(state.copyWith(status: Status.error));
     }

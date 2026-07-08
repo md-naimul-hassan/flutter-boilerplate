@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../app/constants/api_end_point.dart';
-import '../../../../core/network/api_client.dart';
 import '../../../../core/utils/enum.dart';
-import '../../data/model/html_model.dart';
+import '../../data/datasources/remote_data_source.dart';
+import '../../data/models/html_model.dart';
 
 /// Events
 sealed class TermsOfServicesEvent {}
@@ -31,9 +30,9 @@ class TermsOfServicesState {
 /// Bloc
 class TermsOfServicesBloc
     extends Bloc<TermsOfServicesEvent, TermsOfServicesState> {
-  final ApiClient _apiClient;
+  final SettingRemoteDataSource _remote;
 
-  TermsOfServicesBloc(this._apiClient) : super(TermsOfServicesState()) {
+  TermsOfServicesBloc(this._remote) : super(TermsOfServicesState()) {
     on<TermsOfServicesRequested>(_onRequested);
   }
 
@@ -44,18 +43,8 @@ class TermsOfServicesBloc
     emit(state.copyWith(status: Status.loading));
 
     try {
-      final response = await _apiClient.get(ApiEndPoint.termsOfServices);
-
-      if (response.statusCode != 200) {
-        throw Exception(response.message);
-      }
-
-      final Map<String, dynamic> rawData = response.data['data'] ?? {};
-      final Map<String, dynamic> raw = rawData['attributes'] ?? {};
-
-      emit(
-        state.copyWith(status: Status.completed, data: HtmlModel.fromJson(raw)),
-      );
+      final data = await _remote.fetchTermsOfServices();
+      emit(state.copyWith(status: Status.completed, data: data));
     } catch (_) {
       emit(state.copyWith(status: Status.error));
     }

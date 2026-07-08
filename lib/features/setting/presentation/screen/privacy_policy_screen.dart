@@ -7,8 +7,8 @@ import '../../../../app/constants/app_string.dart';
 import '../../../../core/component/other_widgets/common_loader.dart';
 import '../../../../core/component/screen/error_screen.dart';
 import '../../../../core/component/text/common_text.dart';
-import '../../../../core/network/api_client.dart';
 import '../../../../core/utils/enum.dart';
+import '../../data/datasources/remote_data_source.dart';
 import '../bloc/privacy_policy_bloc.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
@@ -17,8 +17,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          PrivacyPolicyBloc(sl<ApiClient>())..add(PrivacyPolicyRequested()),
+      create: (_) => PrivacyPolicyBloc(sl<SettingRemoteDataSource>())
+          ..add(PrivacyPolicyRequested()),
       child: Scaffold(
         appBar: AppBar(
           title: const CommonText(

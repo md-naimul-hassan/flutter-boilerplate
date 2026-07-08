@@ -8,8 +8,8 @@ import '../../../../app/constants/app_string.dart';
 import '../../../../core/component/bottom_nav_bar/common_bottom_bar.dart';
 import '../../../../core/component/pop_up/common_pop_menu.dart';
 import '../../../../core/component/text/common_text.dart';
-import '../../../../core/network/api_client.dart';
 import '../../../../core/utils/app_snackbar.dart';
+import '../../data/datasources/remote_data_source.dart';
 import '../bloc/setting_bloc.dart';
 import '../widgets/setting_item.dart';
 
@@ -41,7 +41,7 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SettingBloc(sl<ApiClient>()),
+      create: (_) => SettingBloc(sl<SettingRemoteDataSource>()),
       child: Scaffold(
         appBar: AppBar(
           title: const CommonText(

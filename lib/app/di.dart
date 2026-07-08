@@ -11,6 +11,7 @@ import '../features/auth/sign_in/data/datasources/remote_data_source.dart';
 import '../features/message/data/datasources/remote_data_source.dart';
 import '../features/notifications/data/datasources/remote_data_source.dart';
 import '../features/profile/data/datasources/remote_data_source.dart';
+import '../features/setting/data/datasources/remote_data_source.dart';
 
 /// Global service locator (replaces GetX dependency injection).
 final GetIt sl = GetIt.instance;
@@ -44,6 +45,9 @@ void dependencyInjection() {
 
   // Profile
   sl.registerLazySingleton(() => ProfileRemoteDataSource(sl()));
+
+  // Setting
+  sl.registerLazySingleton(() => SettingRemoteDataSource(sl()));
 
   // Multi-screen flow blocs (shared state across their screens).
   sl.registerLazySingleton(() => SignUpBloc(sl()));
