@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'logger.dart';
+import '../error/error_handler.dart';
 import 'app_lifecycle_handler.dart';
 
 class AppWrapper extends StatefulWidget {

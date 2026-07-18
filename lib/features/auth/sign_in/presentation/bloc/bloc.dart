@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_boilerplate/core/services/socket/socket_service.dart';
 
 import '../../../../../app/enum.dart';
 import '../../../../../core/error/exceptions.dart';
+import '../../../../../core/services/socket/socket_service.dart';
 import '../../data/datasources/remote_data_source.dart';
 import 'events.dart';
 import 'state.dart';

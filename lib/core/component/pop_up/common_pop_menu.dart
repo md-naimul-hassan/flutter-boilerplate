@@ -53,8 +53,8 @@ class PopUpMenu extends StatelessWidget {
               children: List.generate(
                 items.length,
                 (index) => GestureDetector(
-                  onTap: () async {
-                    await AnimationPopUpState.closeDialog();
+                  onTap: () {
+                    Navigator.of(context).pop();
                     onTap(index);
                   },
                   child: Padding(
@@ -199,7 +199,7 @@ void deletePopUp({
                     buttonColor: AppColors.transparent,
                     buttonRadius: 4.r,
                     buttonHeight: 48.h,
-                    onTap: AnimationPopUpState.closeDialog,
+                    onTap: () => Navigator.of(context).pop(),
                   ),
                 ),
                 SizedBox(width: 16.w),
@@ -208,9 +208,9 @@ void deletePopUp({
                     titleText: AppString.done,
                     buttonRadius: 4.r,
                     buttonHeight: 48.h,
-                    onTap: () async {
+                    onTap: () {
                       if (formKey.currentState!.validate()) {
-                        await AnimationPopUpState.closeDialog();
+                        Navigator.of(context).pop();
                         onTap();
                       }
                     },
@@ -236,8 +236,8 @@ class AnimationPopUp extends StatefulWidget {
 
 class AnimationPopUpState extends State<AnimationPopUp>
     with TickerProviderStateMixin {
-  static late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
+  late final AnimationController _animationController;
+  late final Animation<double> _scaleAnimation;
 
   @override
   void initState() {
@@ -259,9 +259,11 @@ class AnimationPopUpState extends State<AnimationPopUp>
     super.dispose();
   }
 
-  static Future<void> closeDialog() async {
+  Future<void> closeDialog() async {
     await _animationController.reverse();
-    rootNavigatorKey.currentState?.pop();
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
   }
 
   @override

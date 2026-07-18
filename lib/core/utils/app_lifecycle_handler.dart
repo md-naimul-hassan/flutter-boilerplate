@@ -1,41 +1,40 @@
 import 'package:flutter/widgets.dart';
-
-import '../error/error_handler.dart';
+import 'package:flutter_boilerplate/core/utils/logger.dart';
 
 class AppLifecycleHandler with WidgetsBindingObserver {
   void start() {
     WidgetsBinding.instance.addObserver(this);
-    globalLog('Lifecycle observer started');
+    logInfo('Lifecycle observer started');
   }
 
   void stop() {
     WidgetsBinding.instance.removeObserver(this);
-    globalLog('Lifecycle observer stopped');
+    logInfo('Lifecycle observer stopped');
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    globalLog('App lifecycle: $state');
+    logInfo('App lifecycle: $state');
 
     switch (state) {
       case AppLifecycleState.resumed:
-        globalLog('App resumed');
+        logInfo('App resumed');
         break;
 
       case AppLifecycleState.inactive:
-        globalLog('App inactive');
+        logInfo('App inactive');
         break;
 
       case AppLifecycleState.paused:
-        globalLog('App paused');
+        logInfo('App paused');
         break;
 
       case AppLifecycleState.detached:
-        globalLog('App detached');
+        logInfo('App detached');
         break;
 
       case AppLifecycleState.hidden:
-        globalLog('App hidden');
+        logInfo('App hidden');
         break;
     }
   }

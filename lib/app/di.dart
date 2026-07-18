@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-
 import '../core/network/api_client.dart';
 import '../core/network/api_service.dart';
 import '../features/auth/change_password/data/datasources/remote_data_source.dart';
@@ -25,6 +24,6 @@ void dependencyInjection() {
   sl.registerLazySingleton(() => NotificationRemoteDataSource(sl()));
   sl.registerLazySingleton(() => ProfileRemoteDataSource(sl()));
   sl.registerLazySingleton(() => SettingRemoteDataSource(sl()));
-  sl.registerLazySingleton(() => SignUpBloc(sl()));
-  sl.registerLazySingleton(() => ForgotPasswordBloc(sl()));
+  sl.registerFactory(() => SignUpBloc(sl()));
+  sl.registerFactory(() => ForgotPasswordBloc(sl()));
 }

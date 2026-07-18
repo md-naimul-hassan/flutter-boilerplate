@@ -17,7 +17,7 @@ class AlreadyAccountRichText extends StatelessWidget {
           /// Already Have Account
           TextSpan(
             text: AppString.alreadyHaveAccount,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.roboto(
               color: AppColors.black,
               fontSize: 16,
               fontWeight: .w500,
@@ -31,7 +31,7 @@ class AlreadyAccountRichText extends StatelessWidget {
               ..onTap = () {
                 AppNavigator.push(AppRoutes.signIn);
               },
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.roboto(
               color: AppColors.primaryColor,
               fontSize: 16,
               fontWeight: .w600,

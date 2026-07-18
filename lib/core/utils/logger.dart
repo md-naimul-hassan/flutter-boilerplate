@@ -32,21 +32,3 @@ void logFatal(dynamic message) {
   if (!kDebugMode) return;
   logger.f(message);
 }
-
-void globalError(Object error, StackTrace? stack) {
-  if (!kDebugMode) return;
-
-  debugPrint(' Global Error ❌ ERROR: $error');
-  if (stack != null) {
-    debugPrint('Global Error 📌 STACK TRACE:\n$stack');
-  }
-}
-
-void setupGlobalLogging() {
-  if (!kDebugMode) return;
-  final originalDebugPrint = debugPrint;
-  debugPrint = (String? message, {int? wrapWidth}) {
-    if (message == null) return;
-    originalDebugPrint('➡️debugPrint: $message', wrapWidth: wrapWidth);
-  };
-}
