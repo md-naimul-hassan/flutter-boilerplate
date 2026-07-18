@@ -1,8 +1,7 @@
-class HtmlModel {
-  final String id;
-  final String content;
+import '../../domain/entities/html_entity.dart';
 
-  const HtmlModel({required this.id, required this.content});
+class HtmlModel extends HtmlEntity {
+  const HtmlModel({required super.id, required super.content});
 
   factory HtmlModel.fromJson(Map<String, dynamic>? json) {
     return HtmlModel(

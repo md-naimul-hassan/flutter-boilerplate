@@ -17,7 +17,7 @@ class DoNotHaveAccount extends StatelessWidget {
         children: [
           TextSpan(
             text: AppString.doNotHaveAccount,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.roboto(
               color: AppColors.secondary,
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -27,7 +27,7 @@ class DoNotHaveAccount extends StatelessWidget {
             text: AppString.signUp,
             recognizer: TapGestureRecognizer()
               ..onTap = () => AppNavigator.push(AppRoutes.signUp),
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.roboto(
               color: AppColors.primaryColor,
               fontSize: 16,
               fontWeight: FontWeight.w600,

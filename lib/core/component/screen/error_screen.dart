@@ -21,7 +21,7 @@ class ErrorScreen extends StatelessWidget {
             style: TextStyle(
               fontWeight: .w500,
               fontSize: 16,
-              color: AppColors.white,
+              color: AppColors.black,
             ),
           ),
           20.height,

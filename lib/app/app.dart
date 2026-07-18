@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../app/router.dart';
 import '../app/theme.dart';
-
 import '../core/component/scroll_behavior/scroll_behavior.dart';
-import '../core/error/error_handler.dart';
-import '../core/services/socket/socket_service.dart';
-import '../core/storage/storage_services.dart';
 import '../core/utils/app_snackbar.dart';
 
 class MyApp extends StatelessWidget {
@@ -17,7 +12,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _initializeApp());
     return ScreenUtilInit(
       designSize: _designSize,
       minTextAdapt: true,
@@ -30,22 +24,5 @@ class MyApp extends StatelessWidget {
         routerConfig: appRouter,
       ),
     );
-  }
-
-  Future<void> _initializeApp() async {
-    try {
-      await Future.wait([
-        SystemChrome.setPreferredOrientations(const [
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ]),
-        LocalStorage.init(),
-      ]);
-      Future.delayed(const Duration(milliseconds: 300), () {
-        SocketService.connect();
-      });
-    } catch (error, stackTrace) {
-      globalError(error, stackTrace);
-    }
   }
 }

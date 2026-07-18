@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/component/image/common_image.dart';
 import '../../../../core/component/text/common_text.dart';
 import '../../../../core/utils/extension.dart';
-import '../../data/models/chat_list_model.dart';
+import '../../domain/entities/chat_entity.dart';
 
 class ChatListItem extends StatelessWidget {
-  final ChatModel item;
+  final ChatEntity item;
 
   const ChatListItem({super.key, required this.item});
 

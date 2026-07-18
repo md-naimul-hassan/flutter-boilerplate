@@ -36,7 +36,7 @@ A feature-first Flutter starter for mobile apps with authentication, messaging, 
 
 | Category | Packages |
 | --- | --- |
-| Language / SDK | Dart `^3.10.4`, Flutter |
+| Language / SDK | Dart `^3.13.5`, Flutter `3.47.7` |
 | State management | `flutter_bloc` |
 | Navigation | `go_router` |
 | Dependency injection | `get_it` |
@@ -71,7 +71,7 @@ flutter-boilerplate/
 │   │   ├── storage/          # SharedPreferences wrapper (LocalStorage)
 │   │   └── utils/            # Extensions, helpers, logging, snackbars
 │   ├── features/
-│   │   ├── auth/             # sign_in, sign_up, forgot_password, change_password
+│   │   ├── auth/             # sign_in, sign_up, forgot_password, change_password, shared
 │   │   ├── message/          # Chat list and messaging
 │   │   ├── notifications/
 │   │   ├── onboarding/
@@ -79,16 +79,16 @@ flutter-boilerplate/
 │   │   ├── setting/
 │   │   └── splash/
 │   └── main.dart             # Entry point
-├── test/                     # Widget tests
+├── test/                     # Unit and widget tests
 └── web/                      # Web entry point
 ```
 
-Each feature module typically follows a `data/` (remote data sources, models) and `presentation/` (screens, blocs, widgets) layout.
+Each feature follows clean architecture: `domain/` (entities, repository contracts, use cases), `data/` (models, remote data sources, repository implementations returning `Result<T>`), and `presentation/` (blocs, screens, widgets). See [`.architecture/`](.architecture/README.md) for the rules, the per-feature catalog, and a new-feature guide.
 
 ## Prerequisites
 
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) compatible with Dart `^3.10.4`
-- [FVM](https://fvm.app/) (recommended) — this project pins Flutter `3.44.1` in `.fvmrc`
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) compatible with Dart `^3.13.5`
+- [FVM](https://fvm.app/) (recommended) — this project pins Flutter `3.47.7` in `.fvmrc`
 - Xcode (for iOS builds on macOS)
 - Android Studio / Android SDK (for Android builds)
 - A running backend API and Socket.IO server (see [Configuration](#configuration))
@@ -97,7 +97,7 @@ Each feature module typically follows a `data/` (remote data sources, models) an
 
 This project uses FVM to pin the Flutter SDK version across developers and environments.
 
-**Pinned version:** `3.44.1` (`.fvmrc`)
+**Pinned version:** `3.47.7` / Dart `3.13.5` (`.fvmrc`)
 
 ```bash
 # Install FVM: https://fvm.app/documentation/getting-started/installation
@@ -298,7 +298,7 @@ GitHub Actions workflows in `.github/workflows/` deploy on pushes to the `produc
 - `APP_STORE_ISSUER_ID`
 - `APP_STORE_PRIVATE_KEY`
 
-> **Note:** CI workflows reference Flutter `3.38.5`, while `.fvmrc` pins `3.44.1`. Align these versions for consistent local and CI builds.
+> **Note:** CI workflows use Flutter `3.47.7`, matching `.fvmrc`. Update both together when upgrading.
 
 ## Troubleshooting
 
@@ -308,7 +308,7 @@ GitHub Actions workflows in `.github/workflows/` deploy on pushes to the `produc
 | Socket does not connect | Verify `socketUrl` matches your backend and that the user is logged in (user ID is required for notification listeners). |
 | HTTP blocked on Android | Cleartext traffic is enabled for development; use HTTPS in production or update network security config. |
 | FVM / Flutter version mismatch | Run `fvm install && fvm use` and ensure CI Flutter version matches `.fvmrc`. |
-| `flutter pub get` errors | Confirm Dart SDK `^3.10.4` and run `flutter doctor` to verify your environment. |
+| `flutter pub get` errors | Confirm Dart SDK `^3.13.5` (`fvm use`) and run `flutter doctor` to verify your environment. |
 
 ## Contributing
 

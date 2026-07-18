@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../features/auth/change_password/presentation/screen/screen.dart';
-import '../features/auth/forgot_password/presentation/screen/create_password.dart';
-import '../features/auth/forgot_password/presentation/screen/forgot_password.dart';
-import '../features/auth/forgot_password/presentation/screen/verify_screen.dart';
-import '../../features/auth/sign_in/presentation/screen/sign_in_screen.dart';
-import '../features/auth/sign_up/presentation/screen/sign_up_screen.dart';
-import '../features/auth/sign_up/presentation/screen/verify_user.dart';
-import '../../features/message/presentation/screen/chat_screen.dart';
-import '../../features/message/presentation/screen/message_screen.dart';
-import '../../features/notifications/presentation/screen/notifications_screen.dart';
-import '../../features/profile/presentation/screen/edit_profile.dart';
-import '../../features/profile/presentation/screen/profile_screen.dart';
-import '../../features/setting/presentation/screen/privacy_policy_screen.dart';
-import '../../features/setting/presentation/screen/setting_screen.dart';
-import '../../features/setting/presentation/screen/terms_of_services_screen.dart';
-import '../../features/splash/splash_screen.dart';
-import '../features/onboarding/onboarding_screen.dart';
+import '../features/auth/change_password/presentation/screens/change_password_screen.dart';
+import '../features/auth/forgot_password/presentation/screens/create_password_screen.dart';
+import '../features/auth/forgot_password/presentation/screens/forgot_password_screen.dart';
+import '../features/auth/forgot_password/presentation/screens/verify_screen.dart';
+import '../features/auth/sign_in/presentation/screens/sign_in_screen.dart';
+import '../features/auth/sign_up/presentation/screens/sign_up_screen.dart';
+import '../features/auth/sign_up/presentation/screens/verify_user_screen.dart';
+import '../features/message/presentation/screens/chat_list_screen.dart';
+import '../features/message/presentation/screens/message_screen.dart';
+import '../features/notifications/presentation/screens/notifications_screen.dart';
+import '../features/onboarding/presentation/screens/onboarding_screen.dart';
+import '../features/profile/presentation/screens/edit_profile_screen.dart';
+import '../features/profile/presentation/screens/profile_screen.dart';
+import '../features/setting/presentation/screens/privacy_policy_screen.dart';
+import '../features/setting/presentation/screens/setting_screen.dart';
+import '../features/setting/presentation/screens/terms_of_services_screen.dart';
+import '../features/splash/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
   AppRoutes._();
@@ -52,7 +52,10 @@ final GoRouter appRouter = GoRouter(
       builder: (_, _) => const OnboardingScreen(),
     ),
     GoRoute(path: AppRoutes.signUp, builder: (_, _) => const SignUpScreen()),
-    GoRoute(path: AppRoutes.verifyUser, builder: (_, _) => const VerifyUser()),
+    GoRoute(
+      path: AppRoutes.verifyUser,
+      builder: (_, _) => const VerifyUserScreen(),
+    ),
     GoRoute(path: AppRoutes.signIn, builder: (_, _) => const SignInScreen()),
     GoRoute(
       path: AppRoutes.forgotPassword,
@@ -64,7 +67,7 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.createPassword,
-      builder: (_, _) => const CreatePassword(),
+      builder: (_, _) => const CreatePasswordScreen(),
     ),
     GoRoute(
       path: AppRoutes.changePassword,
@@ -89,7 +92,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: AppRoutes.profile, builder: (_, _) => const ProfileScreen()),
     GoRoute(
       path: AppRoutes.editProfile,
-      builder: (_, _) => const EditProfile(),
+      builder: (_, _) => const EditProfileScreen(),
     ),
     GoRoute(
       path: AppRoutes.privacyPolicy,

@@ -1,39 +1,22 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../app/enum.dart';
-import '../../data/datasources/remote_data_source.dart';
-import '../../data/models/html_model.dart';
+import '../../../../core/error/result.dart';
+import '../../domain/entities/html_entity.dart';
+import '../../domain/usecases/get_terms_of_services.dart';
 
-/// Events
-sealed class TermsOfServicesEvent {}
+part 'terms_of_services_event.dart';
+part 'terms_of_services_state.dart';
 
-class TermsOfServicesRequested extends TermsOfServicesEvent {}
-
-/// State
-class TermsOfServicesState {
-  final ApiStatus status;
-  final HtmlModel data;
-
-  TermsOfServicesState({
-    this.status = ApiStatus.initial,
-    HtmlModel? data,
-  }) : data = data ?? HtmlModel.fromJson({});
-
-  TermsOfServicesState copyWith({ApiStatus? status, HtmlModel? data}) {
-    return TermsOfServicesState(
-      status: status ?? this.status,
-      data: data ?? this.data,
-    );
-  }
-}
-
-/// Bloc
 class TermsOfServicesBloc
     extends Bloc<TermsOfServicesEvent, TermsOfServicesState> {
-  final SettingRemoteDataSource _remote;
-
-  TermsOfServicesBloc(this._remote) : super(TermsOfServicesState()) {
+  TermsOfServicesBloc({required this._getTermsOfServices})
+    : super(const TermsOfServicesState()) {
     on<TermsOfServicesRequested>(_onRequested);
   }
+
+  final GetTermsOfServices _getTermsOfServices;
 
   Future<void> _onRequested(
     TermsOfServicesRequested event,
@@ -41,11 +24,13 @@ class TermsOfServicesBloc
   ) async {
     emit(state.copyWith(status: ApiStatus.loading));
 
-    try {
-      final data = await _remote.fetchTermsOfServices();
-      emit(state.copyWith(status: ApiStatus.success, data: data));
-    } catch (_) {
-      emit(state.copyWith(status: ApiStatus.failure));
+    final result = await _getTermsOfServices();
+
+    switch (result) {
+      case Success(:final data):
+        emit(state.copyWith(status: ApiStatus.success, data: data));
+      case Failed():
+        emit(state.copyWith(status: ApiStatus.failure));
     }
   }
 }

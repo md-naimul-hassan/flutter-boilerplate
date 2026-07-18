@@ -1,22 +1,15 @@
-class NotificationModel {
-  final String id;
-  final String message;
-  final String linkId;
-  final String type;
-  final String role;
-  final String receiver;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+import '../../domain/entities/notification_entity.dart';
 
+class NotificationModel extends NotificationEntity {
   const NotificationModel({
-    required this.id,
-    required this.message,
-    required this.linkId,
-    required this.type,
-    required this.role,
-    required this.receiver,
-    required this.createdAt,
-    required this.updatedAt,
+    required super.id,
+    required super.message,
+    required super.linkId,
+    required super.type,
+    required super.role,
+    required super.receiver,
+    required super.createdAt,
+    required super.updatedAt,
   });
 
   factory NotificationModel.fromJson(Map<String, dynamic>? json) {

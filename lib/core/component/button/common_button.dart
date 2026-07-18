@@ -44,6 +44,17 @@ class CommonButton extends StatelessWidget {
       width: buttonWidth,
       child: ElevatedButton(
         onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: buttonColor,
+          foregroundColor: titleColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(buttonRadius),
+            side: BorderSide(
+              color: borderColor ?? buttonColor,
+              width: borderWidth,
+            ),
+          ),
+        ),
         child: isLoading ? _buildLoader() : _buildText(),
       ),
     );

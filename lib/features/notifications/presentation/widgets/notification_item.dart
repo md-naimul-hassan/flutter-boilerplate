@@ -3,11 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/component/text/common_text.dart';
 import '../../../../app/constants/app_colors.dart';
 import '../../../../core/utils/extension.dart';
-import '../../data/models/notification_model.dart';
-
+import '../../domain/entities/notification_entity.dart';
 
 class NotificationItem extends StatelessWidget {
-  final NotificationModel item;
+  final NotificationEntity item;
   final VoidCallback? onTap;
 
   const NotificationItem({super.key, required this.item, this.onTap});

@@ -11,6 +11,11 @@ analyzer:
     missing_required_param: error
 
 
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
   language:
     strict-casts: false
     strict-raw-types: true
