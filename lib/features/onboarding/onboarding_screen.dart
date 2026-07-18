@@ -27,14 +27,14 @@ class OnboardingScreen extends StatelessWidget {
 
               /// Sign In
               ElevatedButton(
-                onPressed: () => AppNavigator.toNamed(AppRoutes.signIn),
+                onPressed: () => AppNavigator.push(AppRoutes.signIn),
                 child: const Text(AppString.signIn),
               ),
               24.height,
 
               /// Sign Up
               ElevatedButton(
-                onPressed: () => AppNavigator.toNamed(AppRoutes.signUp),
+                onPressed: () => AppNavigator.push(AppRoutes.signUp),
                 child: const Text(AppString.signUp),
               ),
             ],

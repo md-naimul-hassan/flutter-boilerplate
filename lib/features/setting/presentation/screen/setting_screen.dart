@@ -61,18 +61,17 @@ class _SettingScreenState extends State<SettingScreen> {
                   SettingItem(
                     title: AppString.changePassword,
                     iconData: Icons.lock_outline,
-                    onTap: () => AppNavigator.toNamed(AppRoutes.changePassword),
+                    onTap: () => AppNavigator.push(AppRoutes.changePassword),
                   ),
                   SettingItem(
                     title: AppString.termsOfServices,
                     iconData: Icons.gavel,
-                    onTap: () =>
-                        AppNavigator.toNamed(AppRoutes.termsOfServices),
+                    onTap: () => AppNavigator.push(AppRoutes.termsOfServices),
                   ),
                   SettingItem(
                     title: AppString.privacyPolicy,
                     iconData: Icons.privacy_tip_outlined,
-                    onTap: () => AppNavigator.toNamed(AppRoutes.privacyPolicy),
+                    onTap: () => AppNavigator.push(AppRoutes.privacyPolicy),
                   ),
                   SettingItem(
                     title: AppString.deleteAccount,

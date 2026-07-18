@@ -43,7 +43,7 @@ class _EditProfileState extends State<EditProfile> {
       AppSnackbar.success(title: 'Success', message: state.message);
       _nameController.clear();
       _numberController.clear();
-      AppNavigator.offNamed(AppRoutes.profile);
+      AppNavigator.push(AppRoutes.profile);
     } else if (state.status == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }

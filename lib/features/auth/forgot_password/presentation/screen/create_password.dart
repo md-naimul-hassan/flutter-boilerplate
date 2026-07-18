@@ -40,7 +40,7 @@ class _CreatePasswordState extends State<CreatePassword> {
   void _onStateChanged(BuildContext context, ForgotPasswordState state) {
     if (state.resetStatus == ApiStatus.success) {
       AppSnackbar.success(title: 'Success', message: state.message);
-      AppNavigator.offAllNamed(AppRoutes.signIn);
+      AppNavigator.go(AppRoutes.signIn);
     } else if (state.resetStatus == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }

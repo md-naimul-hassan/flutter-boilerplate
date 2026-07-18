@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../features/auth/change_password/presentation/screen/screen.dart';
 import '../features/auth/forgot_password/presentation/screen/create_password.dart';
 import '../features/auth/forgot_password/presentation/screen/forgot_password.dart';
@@ -20,6 +19,8 @@ import '../../features/splash/splash_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 
 class AppRoutes {
+  AppRoutes._();
+
   static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String signUp = '/sign-up-screen';
@@ -102,27 +103,22 @@ final GoRouter appRouter = GoRouter(
   ],
 );
 
-/// Context-free navigation helper (drop-in replacement for GetX navigation).
 class AppNavigator {
   AppNavigator._();
 
-  /// Push a new route onto the stack (like `Get.toNamed`).
-  static Future<T?> toNamed<T>(String location, {Object? extra}) {
+  static Future<T?> push<T>(String location, {Object? extra}) {
     return appRouter.push<T>(location, extra: extra);
   }
 
-  /// Replace the whole stack with [location] (like `Get.offAllNamed`).
-  static void offAllNamed(String location, {Object? extra}) {
+  static void go(String location, {Object? extra}) {
     appRouter.go(location, extra: extra);
   }
 
-  /// Replace the current route (like `Get.offNamed`).
-  static void offNamed(String location, {Object? extra}) {
+  static void pushReplacement(String location, {Object? extra}) {
     appRouter.pushReplacement(location, extra: extra);
   }
 
-  /// Pop the current route (like `Get.back`).
-  static void back<T>([T? result]) {
+  static void pop<T>([T? result]) {
     if (appRouter.canPop()) appRouter.pop<T>(result);
   }
 }

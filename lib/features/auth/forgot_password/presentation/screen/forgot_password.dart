@@ -36,7 +36,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void _onStateChanged(BuildContext context, ForgotPasswordState state) {
     if (state.sendStatus == ApiStatus.success) {
       AppSnackbar.success(title: 'Success', message: state.message);
-      AppNavigator.toNamed(AppRoutes.verifyEmail);
+      AppNavigator.push(AppRoutes.verifyEmail);
     } else if (state.sendStatus == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }

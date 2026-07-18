@@ -40,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _onStateChanged(BuildContext context, SignUpState state) {
     if (state.signUpStatus == ApiStatus.success) {
-      AppNavigator.toNamed(AppRoutes.verifyUser);
+      AppNavigator.push(AppRoutes.verifyUser);
     } else if (state.signUpStatus == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }

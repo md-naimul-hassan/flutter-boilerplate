@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _navigate() async {
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
-    AppNavigator.toNamed(AppRoutes.onboarding);
+    AppNavigator.push(AppRoutes.onboarding);
 
     // Example logic
     // final route = LocalStorage.token.isNotEmpty

@@ -65,19 +65,19 @@ class CommonBottomNavBar extends StatelessWidget {
     if (index == currentIndex) return;
     switch (index) {
       case 0:
-        AppNavigator.toNamed(AppRoutes.setting);
+        AppNavigator.push(AppRoutes.setting);
         break;
 
       case 1:
-        AppNavigator.toNamed(AppRoutes.notifications);
+        AppNavigator.push(AppRoutes.notifications);
         break;
 
       case 2:
-        AppNavigator.toNamed(AppRoutes.chat);
+        AppNavigator.push(AppRoutes.chat);
         break;
 
       case 3:
-        AppNavigator.toNamed(AppRoutes.profile);
+        AppNavigator.push(AppRoutes.profile);
         break;
 
       default:

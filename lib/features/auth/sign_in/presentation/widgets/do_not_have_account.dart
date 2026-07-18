@@ -26,7 +26,7 @@ class DoNotHaveAccount extends StatelessWidget {
           TextSpan(
             text: AppString.signUp,
             recognizer: TapGestureRecognizer()
-              ..onTap = () => AppNavigator.toNamed(AppRoutes.signUp),
+              ..onTap = () => AppNavigator.push(AppRoutes.signUp),
             style: GoogleFonts.plusJakartaSans(
               color: AppColors.primaryColor,
               fontSize: 16,

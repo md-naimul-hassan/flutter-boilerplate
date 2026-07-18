@@ -42,8 +42,6 @@ class ChatListScreen extends StatelessWidget {
               onTap: () => context.read<ChatBloc>().add(ChatStarted()),
             ),
             ApiStatus.success => _ChatList(state: state),
-
-            // TODO: Handle this case.
           },
         ),
         bottomNavigationBar: const CommonBottomNavBar(currentIndex: 2),
@@ -104,7 +102,7 @@ class _ChatListState extends State<_ChatList> {
                 itemBuilder: (_, index) {
                   final ChatModel item = chats[index];
                   return GestureDetector(
-                    onTap: () => AppNavigator.toNamed(
+                    onTap: () => AppNavigator.push(
                       AppRoutes.message,
                       extra: {
                         'chatId': item.id,

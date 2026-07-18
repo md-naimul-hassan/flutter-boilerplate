@@ -39,7 +39,7 @@ class _VerifyUserState extends State<VerifyUser> {
 
   void _onStateChanged(BuildContext context, SignUpState state) {
     if (state.verifyStatus == ApiStatus.success) {
-      AppNavigator.offAllNamed(AppRoutes.signIn);
+      AppNavigator.go(AppRoutes.signIn);
     } else if (state.verifyStatus == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }

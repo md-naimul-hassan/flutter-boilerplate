@@ -41,7 +41,7 @@ class _SignInScreenState extends State<SignInScreen> {
     if (state.status == ApiStatus.success) {
       _emailController.clear();
       _passwordController.clear();
-      AppNavigator.offAllNamed(AppRoutes.profile);
+      AppNavigator.go(AppRoutes.profile);
     } else if (state.status == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }
@@ -99,7 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       alignment: .centerRight,
                       child: InkWell(
                         onTap: () =>
-                            AppNavigator.toNamed(AppRoutes.forgotPassword),
+                            AppNavigator.push(AppRoutes.forgotPassword),
                         child: const CommonText(
                           text: AppString.forgotThePassword,
                           top: 10,

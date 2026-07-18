@@ -83,6 +83,6 @@ class LocalStorage {
   static Future<void> logout() async {
     SocketService.disconnect();
     await clear();
-    AppNavigator.offAllNamed(AppRoutes.signIn);
+    AppNavigator.go(AppRoutes.signIn);
   }
 }

@@ -52,12 +52,12 @@ class ProfileScreen extends StatelessWidget {
                   Item(
                     icon: Icons.person,
                     title: AppString.editProfile,
-                    onTap: () => AppNavigator.toNamed(AppRoutes.editProfile),
+                    onTap: () => AppNavigator.push(AppRoutes.editProfile),
                   ),
                   Item(
                     icon: Icons.settings,
                     title: AppString.settings,
-                    onTap: () => AppNavigator.toNamed(AppRoutes.setting),
+                    onTap: () => AppNavigator.push(AppRoutes.setting),
                   ),
                   Padding(
                     padding: .symmetric(horizontal: 16.w),

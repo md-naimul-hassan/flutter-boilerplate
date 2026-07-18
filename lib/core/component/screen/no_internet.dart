@@ -21,7 +21,7 @@ class NoInternet extends StatelessWidget {
             const CommonText(text: AppString.noInternet, fontSize: 18, top: 16),
             const CommonText(text: AppString.checkInternet, top: 8, bottom: 20),
             CommonButton(
-              onTap: () => AppNavigator.back(),
+              onTap: () => AppNavigator.pop(),
               titleText: AppString.back,
               buttonWidth: 80,
               buttonHeight: 40,

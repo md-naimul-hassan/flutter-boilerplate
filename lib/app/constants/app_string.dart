@@ -5,7 +5,6 @@ class AppString {
   static const String noInternet = 'No Internet';
   static const String checkInternet = 'Check Internet';
   static const String somethingIsWrong = 'Something is wrong';
-
   static const String back = 'Back';
   static const String youSureWantToLogout = 'You sure want to logout';
   static const String no = 'No';
@@ -16,7 +15,6 @@ class AppString {
   static const String done = 'Done';
   static const String deleteDetails =
       'All your changes will be deleted and you will no longer be able to access them.';
-
   static const String tryAgain = 'Try Again';
   static const String phoneNumber = 'Phone Number';
   static const String test = 'Test';

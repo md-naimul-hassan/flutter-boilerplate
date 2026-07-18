@@ -34,7 +34,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   void _onStateChanged(BuildContext context, ForgotPasswordState state) {
     if (state.verifyStatus == ApiStatus.success) {
-      AppNavigator.toNamed(AppRoutes.createPassword);
+      AppNavigator.push(AppRoutes.createPassword);
     } else if (state.verifyStatus == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }

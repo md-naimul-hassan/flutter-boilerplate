@@ -46,7 +46,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       _newPasswordController.clear();
       _confirmPasswordController.clear();
       AppSnackbar.success(title: 'Success', message: state.message);
-      AppNavigator.back();
+      AppNavigator.pop();
     } else if (state.status == ApiStatus.failure) {
       AppSnackbar.error(message: state.message);
     }
@@ -124,7 +124,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       alignment: .centerLeft,
                       child: InkWell(
                         onTap: () =>
-                            AppNavigator.toNamed(AppRoutes.forgotPassword),
+                            AppNavigator.push(AppRoutes.forgotPassword),
                         child: CommonText(
                           text: AppString.forgotPassword,
                           color: AppColors.primaryColor,

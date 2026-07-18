@@ -29,7 +29,7 @@ class AlreadyAccountRichText extends StatelessWidget {
             text: AppString.signIn,
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                AppNavigator.toNamed(AppRoutes.signIn);
+                AppNavigator.push(AppRoutes.signIn);
               },
             style: GoogleFonts.plusJakartaSans(
               color: AppColors.primaryColor,
