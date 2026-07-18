@@ -1,4 +1,4 @@
-import 'package:socket_io_client/socket_io_client.dart' as io;
+import 'package:socket_io_client/socket_io_client.dart';
 
 import '../../../app/constants/api_end_point.dart';
 import '../../storage/storage_services.dart';
@@ -7,7 +7,7 @@ import '../../utils/logger.dart';
 class SocketService {
   SocketService._();
 
-  static io.Socket? _socket;
+  static Socket? _socket;
 
   /// Socket connection state
   static bool get isConnected => _socket?.connected ?? false;
@@ -17,9 +17,9 @@ class SocketService {
     if (isConnected) return;
     logInfo('🔌 Initializing socket connection');
 
-    _socket = io.io(
+    _socket = io(
       ApiEndPoint.socketUrl,
-      io.OptionBuilder()
+      OptionBuilder()
           .setTransports(['websocket'])
           .enableAutoConnect()
           .enableReconnection()
@@ -130,7 +130,7 @@ class SocketService {
   }
 
   /// ================= INTERNAL =================
-  static io.Socket? _getConnectedSocket() {
+  static Socket? _getConnectedSocket() {
     if (_socket == null) {
       connect();
       return null;

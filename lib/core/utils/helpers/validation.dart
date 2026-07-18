@@ -7,7 +7,6 @@ class AppValidation {
   AppValidation._();
 
   static final emailRegexp = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
-
   static final passRegExp = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$');
 
   static String? required(String? value) {

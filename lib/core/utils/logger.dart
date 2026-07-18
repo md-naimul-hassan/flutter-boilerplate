@@ -25,13 +25,11 @@ void logWarning(dynamic message) {
 
 void logError(dynamic message) {
   if (!kDebugMode) return;
-
   logger.e(message);
 }
 
 void logFatal(dynamic message) {
   if (!kDebugMode) return;
-
   logger.f(message);
 }
 
@@ -42,8 +40,6 @@ void globalError(Object error, StackTrace? stack) {
   if (stack != null) {
     debugPrint('Global Error 📌 STACK TRACE:\n$stack');
   }
-  // Optional: Send to remote logging
-  // FirebaseCrashlytics.instance.recordError(error, stack);
 }
 
 void setupGlobalLogging() {
