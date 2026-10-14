@@ -1,16 +1,15 @@
 class ApiEndPoint {
   ApiEndPoint._();
 
-  static const baseUrl = 'http://10.10.26.205:3000/api/';
+  static const baseUrl = 'http://10.10.26.205:8001/api/v1/';
   static const imageUrl = 'http://10.10.26.205:3000';
   static const socketUrl = 'http://10.10.26.205:3000';
 
-  static const signUp = 'auth/register';
-  static const verifyEmail = 'auth/verify-otp';
+  static const signUp = 'user';
+  static const verifyEmail = 'auth/verify-email';
   static const resendOtp = 'auth/resend-otp';
   static const signIn = 'auth/login';
   static const forgotPassword = 'auth/forgot-password';
-  static const verifyOtp = 'auth/verify-reset-otp';
   static const resetPassword = 'auth/reset-password';
   static const changePassword = 'auth/change-password';
   static const user = 'users';

@@ -35,6 +35,7 @@ class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
         'name': name.trim(),
         'email': email.trim(),
         'password': password.trim(),
+        'role': 'USER',
       },
     );
 

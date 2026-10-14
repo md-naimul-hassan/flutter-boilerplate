@@ -38,7 +38,7 @@ class ForgotPasswordRemoteDataSourceImpl
   @override
   Future<String> verifyOtp({required String email, required String otp}) async {
     final response = await _apiClient.post(
-      ApiEndPoint.verifyOtp,
+      ApiEndPoint.verifyEmail,
       body: {'email': email.trim(), 'otp': otp.trim()},
     );
 
@@ -46,8 +46,8 @@ class ForgotPasswordRemoteDataSourceImpl
       throw ApiException(response.statusCode, response.message);
     }
 
-    final Map<String, dynamic> data = response.data['data'] ?? {};
-    return data['forgetPasswordToken'] ?? '';
+    final  data = response.data['data'] ;
+    return data ?? '';
   }
 
   @override
